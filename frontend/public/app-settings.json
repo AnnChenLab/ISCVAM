@@ -1,0 +1,227 @@
+{
+    "datasets" : [
+        {
+            "name": "4190 CSF LMD Human",
+             "url": "http://zc:8001/project/4190_CSF_Human",
+            "layers": [
+               {"name": "all", "id":"all"},
+               {"name": "myeloid", "id":"myeloid"},
+               {"name": "lymphoid", "id":"lymphoid"},
+               {"name": "epithelial", "id":"epithelial"}
+             ],
+             "modalities": ["RNA"]
+               },
+                  {
+            "name": "4190 CSF LMD mouse",
+             "url": "http://zc:8001/project/4190_CSF_Mouse",
+            "layers": [
+               {"name": "all", "id":"all"},
+               {"name": "myeloid", "id":"myeloid"},
+               {"name": "lymphoid", "id":"lymphoid"},
+               {"name": "glial", "id":"glial"},
+               {"name": "epithelial", "id":"epithelial"}
+             ],
+             "zip": "4190.mouse.report.2023-05-05.html",
+             "modalities": ["RNA"]
+           },
+           {
+            "name": "multiome discovery WNN",
+            "url": "http://localhost:8001/project/discovery_dataset",
+            "layers": [
+                {"name": "RNA", "id":"rna"},
+                {"name": "ATAC", "id":"atac"},
+                {"name": "WNN", "id":"wnn"}
+            ],
+            "modalities": ["RNA", "ATAC"]
+        },
+        {
+            "name": "multiome validation",
+            "url": "http://localhost:8001/project/internal_validation",
+            "layers": [
+                {"name": "RNA", "id":"rna"},
+                {"name": "ATAC", "id":"atac"},
+                {"name": "WNN", "id":"wnn"}
+            ],
+            "modalities": ["RNA", "ATAC"]
+        },
+        {
+            "name": "multiome PBMC",
+            "url": "http://localhost:8001/project/PBMC_multiome",
+            "layers": [
+                {"name": "RNA", "id":"rna"},
+                {"name": "ATAC", "id":"atac"},
+                {"name": "WNN", "id":"wnn"}
+            ],
+            "modalities": ["RNA", "ATAC"]
+        },
+        {   "name": "CICPT 3135 pediatric",
+            "url": "http://zc:8001/project/mouse_3135",
+            "layers": [
+                    {"name":"all","id":"all"},
+                    {"name":"myeloids","id":"myeloids"},
+                    {"name":"lymphoids","id":"lymphoids"},
+                    {"name":"fibroblasts", "id":"fibroblasts"}],
+              "modalities": ["RNA"]
+        },
+        {
+            "name": "CICPT_3601_ovarian_8samples_4patients_multiome",
+            "url": "http://zc:8002/project/CICPT_3601_ovarian_8samples_multiome",
+            "layers": [
+              {"name": "RNA", "id":"rna"},
+              {"name": "ATAC", "id":"atac"}
+            ],
+            "modalities": ["RNA"]
+          },
+        {
+            "name": "CICPT_3601_multiome_ovarian_100809M_TRM_ReCir",
+            "url": "http://MLC02YH26DJGH6:8001/project/CICPT_3601_ovarian_TMR_ReCir",
+            "layers": [
+              {"name": "RNA", "id":"rna"},
+              {"name": "ATAC", "id":"atac"},
+              {"name": "WNN", "id":"wnn"}
+            ],
+            "modalities": ["RNA"]
+          },
+          {
+            "name": "CICPT_3601_multiome_pbmc_11k",
+             "url": "http://zc:8002/project/CICPT_3601_pbmc_11k",
+             "layers": [
+               {"name": "RNA", "id":"rna"},
+               {"name": "ATAC", "id":"atac"},
+               {"name": "WNN", "id":"wnn"}
+             ],
+             "modalities": ["RNA"]
+           },
+        {
+            "name": "KRAS PDAC 3106 batch 1 test",
+            "url": "http://zc:8001/project/pdac_3106_batch1",
+            "layers": [
+                {"name":"myeloids","id":"myeloids"},
+
+                    {"name":"lymphoids","id":"lymphoids"},
+                    {"name":"all","id":"all"},
+                    {"name":"fibroblasts","id":"fibroblasts"}
+            ],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "CICPT_3601_multiome_ovarian_100809M_TRM",
+            "url": "http://zc:8002/project/CICPT_3601_ovarian_100809M_TRM_multiome",
+            "layers": [
+                {"name": "RNA", "id":"rna"},
+               {"name": "ATAC", "id":"atac"},
+               {"name": "WNN", "id":"wnn"}
+             ],
+                "modalities": ["RNA"]
+           },
+   
+        {
+            "name": "KRAS PDAC 3106 batch 2 test",
+            "url": "http://zc:8001/project/pdac_3106_batch2",
+            "layers": [
+                    {"name":"all","id":"all"},
+                    {"name":"myeloids","id":"myeloids"},
+                    {"name":"lymphoids","id":"lymphoids"},
+                    {"name":"fibroblasts","id":"fibroblasts"}
+
+            ],
+            "modalities": ["RNA"]
+        },
+
+        {
+            "name": "CCR combined skin mb csf",
+            "reference": "https://pubmed.ncbi.nlm.nih.gov/34035069/",
+            "url": "http://iscva.moffitt.org:8001/project/combined_18_ex4_add9_NK_XL10_mb1864",
+            "layers": [{"name":"all","id":"all"},{"name": "myeloid", "id":"myeloid"}, {"name": "t/nk", "id":"tnk"}, {"name": "b cells", "id":"bcell"}],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "Tirosh", 
+            "reference": "https://pubmed.ncbi.nlm.nih.gov/27124452/",
+            "url": "http://iscva.moffitt.org:8001/project/tirosh",
+            "layers": [{"name":"all","id":"all"},{"name": "myeloid", "id":"myeloids"}, {"name": "t/nk", "id":"tNks"}],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "pbmc10kv3",
+            "reference": "https://www.10xgenomics.com/resources/datasets/10-k-pbm-cs-from-a-healthy-donor-v-3-chemistry-3-standard-3-0-0",
+            "url": "http://iscva.moffitt.org:8001/project/pbmc10k10xv3",
+            "layers": [{"name":"all","url":"data/pbmc10kv3.singler.3.1.json"}],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "CICPT 2958 updated",
+            "url": "http://zc:8002/project/Abate_2958_update",
+            "layers": [
+                    {"name": "all", "id":"all"},
+                    {"name": "T cells", "id":"Tcell"},
+                    {"name": "Melanocytes", "id":"melanocyte"},
+                    {"name": "Myeloids", "id":"myeloid"},
+                    {"name": "B cells", "id":"Bcell"}
+            ],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "CICPT 2958",
+            "url": "http://MLC02YH26DJGH6:8001/project/abate2958",
+            "layers": [
+                    {"name": "all", "id":"all"},
+                    {"name": "T cells", "id":"Tcell"},
+                    {"name": "Melanocytes", "id":"melanocyte"},
+                    {"name": "Myeloids", "id":"myeloid"},
+                    {"name": "B cells", "id":"Bcell"}
+            ],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "ISCVAM",
+            "url": "http://mlc02yh26djgh6:8001/project/iscvam",
+            "layers": [
+                    {"name": "RNA", "id":"rna"},
+                    {"name": "ATAC", "id":"atac"},
+                    {"name": "WNN", "id":"wnn"}
+            ],
+            "modalities": ["RNA"],
+            "zip": "iscvam.zip"
+        },
+        {
+            "name": "RWPE ISCVAM",
+            "url": "http://zc:8001/project/RWPE_iscvam",
+            "layers": [
+                    {"name": "RNA", "id":"rna"},
+                    {"name": "ATAC", "id":"atac"},
+                    {"name": "WNN", "id":"wnn"}
+            ],
+            "modalities": ["RNA"],
+            "zip": "RWPE.iscvam.zip"
+        },
+
+        {
+            "name": "Fluorophore 3558",
+            "url": "http://MLC02YH26DJGH6:8001/project/fluorophore_3558",
+            "layers": [{"name":"all","id":"all"}],
+            "modalities": ["RNA"]
+        },
+
+        {
+            "name": "1747 Fluorophore enrich",
+            "url": "http://MLC02YH26DJGH6:8001/project/1747uvmiceEnrich",
+            "layers": [{"name":"all","id":"all"}],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "KRAS PDAC 3106 batch 1",
+            "url": "http://MLC02YH26DJGH6:8001/project/pdac_3106_batch1",
+            "layers": [{"name":"all","id":"all"}],
+            "modalities": ["RNA"]
+        },
+        {
+            "name": "KRAS PDAC 3106 batch 2",
+            "url": "http://MLC02YH26DJGH6:8001/project/pdac_3106_batch2",
+            "layers": [{"name":"all","id":"all"}],
+            "modalities": ["RNA"]
+        }
+
+
+    ]
+}
