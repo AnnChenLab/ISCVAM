@@ -1,0 +1,18 @@
+[
+    {
+        "name": "discovery_dataset",
+        "filename": "data/demo/test_discover_42.h5"
+    },
+    {
+        "name": "PBMC_multiome",
+        "filename": "data/demo/PBMC_multiome_2.h5"
+    },
+    {
+        "name": "internal_validation",
+        "filename": "data/demo/internal_validation_multiome_5.h5"
+    },
+    {
+        "name": "test_iscvamR",
+        "filename": "data/datasets/test_iscvamR.h5"
+    }
+]
