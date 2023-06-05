@@ -19,6 +19,7 @@ Be sure to have the following technologies installed with the required version:
   - https://docs.docker.com/engine/install/
 - If not using docker, make sure you have
   - Node `v16.20.0` for the backend
+  - node hdf5 addon: https://github.com/zhihua-chen/hdf5.node
   - Node `v18.16.0` for the frontend
 
 ## Folder Structure:
