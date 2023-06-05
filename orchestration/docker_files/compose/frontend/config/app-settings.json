@@ -1,0 +1,71 @@
+{
+    "datasets": [
+        {
+            "name": "multiome discovery WNN",
+            "url": "http://localhost:8001/project/discovery_dataset",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ],
+            "zip": "linkage_discovery.zip"
+        },
+        {
+            "name": "multiome validation",
+            "url": "http://localhost:8001/project/internal_validation",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+        {
+            "name": "multiome PBMC",
+            "url": "http://localhost:8001/project/PBMC_multiome",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        }
+    ]
+}
