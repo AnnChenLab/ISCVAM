@@ -10,9 +10,5 @@
     {
         "name": "internal_validation",
         "filename": "data/demo/internal_validation_multiome_5.h5"
-    },
-    {
-        "name": "test_iscvamR",
-        "filename": "data/datasets/test_iscvamR.h5"
     }
 ]

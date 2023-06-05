@@ -66,28 +66,6 @@
                 "RNA",
                 "ATAC"
             ]
-        },
-        {
-            "name": "TEST VALIDATION",
-            "url": "http://localhost:8001/project/test_iscvamR",
-            "layers": [
-                {
-                    "name": "RNA",
-                    "id": "rna"
-                },
-                {
-                    "name": "ATAC",
-                    "id": "atac"
-                },
-                {
-                    "name": "WNN",
-                    "id": "wnn"
-                }
-            ],
-            "modalities": [
-                "RNA",
-                "ATAC"
-            ]
         }
     ]
 }
