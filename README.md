@@ -17,8 +17,9 @@ Be sure to have the following technologies installed with the required version:
 - Docker
   - With the CLI commands enabled (for running `docker` and `docker-compose`)
   - https://docs.docker.com/engine/install/
-- Node `v16.20.0` for the backend
-- Node `v18.16.0` for the backend
+- If not using docker, make sure you have
+  - Node `v16.20.0` for the backend
+  - Node `v18.16.0` for the frontend
 
 ## Folder Structure:
 
