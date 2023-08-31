@@ -1,5 +1,5 @@
 ###
-#immediate steps for cell annotation, before writing to h5-ISCVAM compliant
+#intermediate steps for cell annotation, before writing to h5-ISCVAM compliant
 #input will be results from analysis pipeline
 #very specific just for this DISCOVERY dataset
 
