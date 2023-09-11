@@ -29,6 +29,11 @@ Be sure to have the following technologies installed with the required version:
 ```bash
     |- backend # backend files
     |- frontend # frontend files
+    |- example_scripts
+        |- multiome_data
+            |- discovery_dataset
+            |- internal_validation_dataset
+            |- external_validation_dataset
     |- orchestration
         |- docker-files
             |- backend
@@ -44,5 +49,22 @@ Be sure to have the following technologies installed with the required version:
                 |- datasets # place to put own .h5 files
                 |- docker-compose.yml
 
+
     |- pipeline # r files
 ```
+
+# ISCVAM example datasets
+
+We applied ISCVAM to investigate cell populations using two Multiome datasets for proof of principle. The two multiome datasets are: 
+1) 16,232 cells from the matched pairs of sorted CD8+ Tissue resident memory (TRM) and recirculating (ReCir) T cells from 4 ovarian cancer patients in Anadon, Yu et al. 2022
+2) 11,172 cells from a PBMC sample from 10X Genomics
+
+In our manucript, the two datasets was used as:
+- discovery dataset: which is the paired TRM and ReCir samples from a single patient (patient 100809M) in ovarian cancer paper
+- internal validation dataset: the rest of 3 patients with their paired TRM and ReCir samples for each patient from the ovarian cancer paper
+- external validation dataset: PBMC multiome data
+
+### Reference datasets
+- Anadon et al. Ovarian cancer immunogenicity is governed by a narrow subset of progenitor tissue-resident memory T cell. Cancer Cell (2022) 
+- PBMC sampple: https://www.10xgenomics.com/resources/datasets/pbmc-from-a-healthy-donor-granulocytes-removed-through-cell-sorting-10-k-1-standard-1-0-0 
+
