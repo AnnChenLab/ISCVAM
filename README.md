@@ -34,6 +34,8 @@ Be sure to have the following technologies installed with the required version:
             |- discovery_dataset
             |- internal_validation_dataset
             |- external_validation_dataset
+        |- scRNA_seq
+            |- TISCH_iscvamR_h5
     |- orchestration
         |- docker-files
             |- backend
