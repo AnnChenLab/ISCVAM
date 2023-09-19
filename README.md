@@ -58,7 +58,7 @@ Be sure to have the following technologies installed with the required version:
 # ISCVAM example datasets
 
 We applied ISCVAM to investigate cell populations using two Multiome datasets for proof of principle. The two multiome datasets are: 
-1) 16,232 cells from the matched pairs of sorted CD8+ Tissue resident memory (TRM) and recirculating (ReCir) T cells from 4 ovarian cancer patients in Anadon, Yu et al. 2022
+1) 16,232 cells from the matched pairs of sorted CD8+ Tissue resident memory (TRM) and recirculating (ReCir) T cells from 4 ovarian cancer patients in Anadon, Yu et al. 2022, with GEO: GSE192780
 2) 11,172 cells from a PBMC sample from 10X Genomics
 
 In our manucript, the two datasets was used as:
