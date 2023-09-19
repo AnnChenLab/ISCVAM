@@ -315,15 +315,17 @@ heatmap_artifacts_from_seurat <- function(seurat, clustering, markers, assay, mi
     as.data.frame(
       cbind(
         feature.name = rownames(data_source),
-        as.matrix(cluster_averages[[cluster_averages@active.assay]]@data[features,])
+       # as.matrix(cluster_averages[[cluster_averages@active.assay]]@data[features,])
+        
+        as.matrix(data_source[features,])
       )
     )
   }
 
   all_markers_lognorm <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@data, rownames(cluster_averages[[cluster_averages@active.assay]]@data))
   all_markers_scaled <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@scale.data, rownames(cluster_averages[[cluster_averages@active.assay]]@scale.data))
-  heatmap_markers_lognorm <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@data, markers_use)
-  heatmap_markers_scaled <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@scale.data, markers_use)
+  heatmap_markers_lognorm <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@data[markers_use,], markers_use)
+  heatmap_markers_scaled <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@scale.data[markers_use,], markers_use)
 
   list(
     markers = markers %>% dplyr::mutate(cluster = as.character(.data$cluster)),
