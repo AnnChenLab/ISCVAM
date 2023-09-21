@@ -97,8 +97,8 @@ prep_covs_Tisch <- function(covs){
   #(2) prep for input of artifacts in covs to write h5
   
   #remove cell barcodes in first column
-  covs <- covs[,-1]
-  
+ covs <- covs[,-1]
+
   qc_features = c("nFeature_RNA", "nCount_RNA")
   clustering_names = grep("(Cluster)|(Celltype.*)",colnames(covs), value=T)
   
@@ -111,7 +111,6 @@ prep_covs_Tisch <- function(covs){
 }
 
 covs.Tisch <- prep_covs_Tisch(covs)
-
 
 #############################
 #create RNA layer artifacts
@@ -143,10 +142,10 @@ layer_artifacts_from_seurat_TISCH <- function(seurat, qc_features,
   
   if(is.null(extra_continuous_covs)) {
     covs.h5 <- cbind(extra_discrete_covs, clusterings, 
-                     id = seurat[['orig.ident']], umap_cords, qc_stats)
+                     id = colnames(seurat), umap_cords, qc_stats)
   }else{
     covs.h5 <- cbind(extra_discrete_covs, clusterings, extra_continuous_covs,
-                     id = seurat[['orig.ident']], umap_cords, qc_stats )
+                     id = colnames(seurat), umap_cords, qc_stats )
   }
   
   # Identify discrete and continuous covariates
@@ -155,7 +154,7 @@ layer_artifacts_from_seurat_TISCH <- function(seurat, qc_features,
                        colnames(umap_cords), colnames(qc_stats))
   
   # Return list with covariates and their types
-  list(covs = covs, discreteCovs = discrete_covs, continuousCovs = continuous_covs)
+  list(covs = covs.h5, discreteCovs = discrete_covs, continuousCovs = continuous_covs)
 }
 
 covs_artifacts <- layer_artifacts_from_seurat_TISCH(seurat, 
@@ -166,12 +165,13 @@ covs_artifacts <- layer_artifacts_from_seurat_TISCH(seurat,
 #adding clustering artifacts into covs
 covs_artifacts[["clusterings"]] <- clusterings_artifacts
 
+
 layers <- list(all = covs_artifacts)
 
 ################################
 ###writing ISCVAM-h5 file
 
-fn <- paste0(project, "_test_4.h5")
+fn <- paste0(project, "_test_6.h5")
 
 write_h5(fn, seurat, layers, assays = c("RNA"))
 
@@ -183,3 +183,10 @@ h5 <- H5Fopen(fn)
 
 #check h5 structure 
 h5ls(h5)
+
+#check variable names in covs
+colnames(h5$'/artifacts/all/covs')
+
+#check discrete covs 
+h5$'/artifacts/all/discreteCovs'
+
