@@ -3,10 +3,12 @@ import { useRef, useReducer, useEffect } from 'react';
 export function useDataPanels({datasets, initialDatasetIdx, nPanels}) {
     const initialCache = {};
     const cache = useRef(initialCache);
+    console.log("Initial Cache: ", initialCache)
 
     const initialState = 
         [...Array(nPanels)].map(() => ({ data: null }));
-        
+    console.log("Initial Cache: ", initialCache)   
+     
     const [state, dispatch] = useReducer(reducer, initialState);
 
     function deleteFromCache(datasetIdx) {
@@ -38,8 +40,19 @@ export function useDataPanels({datasets, initialDatasetIdx, nPanels}) {
                 break;        
 
             case 'LOAD_ALL_PANELS':
-                stateToUpdate.forEach(p => p.data = cache.current[action.datasetIdx].store);
-                cache.current[action.datasetIdx].rc += stateToUpdate.length;
+                // stateToUpdate.forEach(p => p.data = cache.current[action.datasetIdx].store);
+                // cache.current[action.datasetIdx].rc += stateToUpdate.length;
+                // break;
+                console.log("Action datasetIdx:", action.datasetIdx);
+                console.log("Cache current:", cache.current);
+            
+                if (cache.current[action.datasetIdx]) {
+                    stateToUpdate.forEach(p => p.data = cache.current[action.datasetIdx].store);
+                    cache.current[action.datasetIdx].rc = stateToUpdate.length;
+                } else {
+                    console.error(`Invalid datasetIdx: ${action.datasetIdx}`);
+                    console.error("Cache current:", cache.current);
+                }
                 break;
 
 			default:

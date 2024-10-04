@@ -1,0 +1,3194 @@
+{
+    "datasets" : [
+        {
+            "name": "SKCM_GSE123139.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE123139.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE161529.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE161529.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "ESCA_GSE160269.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/ESCA_GSE160269.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "ALL_GSE154109.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/ALL_GSE154109.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_EMTAB8107.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_EMTAB8107.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE114727_10X.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE114727_10X.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE136206_mouse_aPD1aCTLA4.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE136206_mouse_aPD1aCTLA4.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CESC_GSE168652.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CESC_GSE168652.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_EMTAB8107.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_EMTAB8107.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIPAN_GSE154763.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIPAN_GSE154763.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIRC_GSE111360.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE111360.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIRC_GSE159115.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE159115.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE166635.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE166635.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MF_GSE165623.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MF_GSE165623.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE151310.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE151310.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE164551.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE164551.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NHL_GSE128531.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NHL_GSE128531.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE127465.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE127465.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_EMTAB8107.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_EMTAB8107.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE162708.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE162708.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PCFCL_GSE173820.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PCFCL_GSE173820.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PRAD_GSE137829.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PRAD_GSE137829.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SCC_GSE123813_aPD1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SCC_GSE123813_aPD1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SCC_GSE144236.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SCC_GSE144236.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SCC_GSE145328.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SCC_GSE145328.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SKCM_GSE148190.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE148190.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE143423.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/iscvam/project/NSCLC_GSE143423.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "THCA_GSE148673.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/THCA_GSE148673.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        
+        {
+            "name": "BRCA_GSE176078.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE176078.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE136394.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE136394.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE166555.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE166555.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "HNSC_GSE139324.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/HNSC_GSE139324.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE161801.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE161801.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE175385.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE175385.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NPC_GSE162025.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NPC_GSE162025.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE139555.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE139555.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE148071.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE148071.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE162498.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE162498.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE158722.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE158722.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PBMC_60K.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PBMC_60K.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PRAD_GSE172301.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PRAD_GSE172301.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "RB_GSE166173.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/RB_GSE166173.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SKCM_GSE159251.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE159251.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "UVM_GSE139829.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE139829.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        
+        {
+            "name": "multiome_discovery test",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/multiome_discovery",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+
+
+        {
+            "name": "multiome_int.validation test",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/multiome_int.validation",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+
+        {
+            "name": "multiome_PBMC_test",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/multiome_PBMC",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+
+        {
+            "name": "AEL_GSE142213.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/AEL_GSE142213.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "ALL_GSE132509.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/ALL_GSE132509.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "ALL_GSE153697.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/ALL_GSE153697.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "AML_GSE116256.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/AML_GSE116256.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "AML_GSE135851.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/AML_GSE135851.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "AML_GSE147989.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/AML_GSE147989.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "AML_GSE154109.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/AML_GSE154109.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BLCA_GSE130001.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BLCA_GSE130001.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BLCA_GSE145281_aPDL1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BLCA_GSE145281_aPDL1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BLCA_GSE149652.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BLCA_GSE149652.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE110686.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE110686.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE114727_inDrop.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE114727_inDrop.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE138536.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE138536.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE143423.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE143423.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE148673.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE148673.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_GSE150660.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_GSE150660.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BRCA_SRP114962.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_SRP114962.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CHOL_GSE125449_aPD1aPDL1aCTLA4.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CHOL_GSE125449_aPD1aPDL1aCTLA4.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CHOL_GSE138709.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CHOL_GSE138709.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CHOL_GSE142784.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CHOL_GSE142784.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CLL_GSE111014.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CLL_GSE111014.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CLL_GSE142744.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CLL_GSE142744.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CLL_GSE152469.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CLL_GSE152469.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CLL_GSE159417.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CLL_GSE159417.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE108989.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE108989.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE112865_mouse_aPD1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE112865_mouse_aPD1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE120909_mouse_aPD1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE120909_mouse_aPD1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE122969_mouse_aPD1aTIM3.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE122969_mouse_aPD1aTIM3.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE139555.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE139555.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE146771_Smartseq2.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE146771_Smartseq2.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE179784.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE179784.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "DLBC_GSE175510.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/DLBC_GSE175510.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "ESCA_GSE154763.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/ESCA_GSE154763.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "ESCA_GSE173950.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/ESCA_GSE173950.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "GCTB_GSE168664.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/GCTB_GSE168664.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "GIST_GSE162115.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/GIST_GSE162115.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE102130.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE102130.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE103224.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE103224.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE131928_10X.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE131928_10X.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE131928_Smartseq2.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE131928_Smartseq2.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE135437.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE135437.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE138794.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE138794.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE139448.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE139448.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE141383.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE141383.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE141460.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE141460.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE141982.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE141982.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE148842.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE148842.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE162631.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE162631.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE163108_10X.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE163108_10X.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE163108_Smartseq2.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE163108_Smartseq2.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE70630.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE70630.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE84465.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE84465.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Glioma_GSE89567.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE89567.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "HNSC_GSE103322.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/HNSC_GSE103322.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KICH_GSE159115.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KICH_GSE159115.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIPAN_GSE159913.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIPAN_GSE159913.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIRC_GSE121636.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE121636.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIRC_GSE145281_aPDL1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE145281_aPDL1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIRC_GSE171306.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE171306.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE125449_aPDL1aCTLA4.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE125449_aPDL1aCTLA4.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE140228_Smartseq2.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE140228_Smartseq2.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE146115.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE146115.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE146409.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE146409.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE179795.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE179795.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE98638.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE98638.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LSCC_GSE150321.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LSCC_GSE150321.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MB_GSE119926.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MB_GSE119926.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MB_GSE155446.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MB_GSE155446.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MCC_GSE117988_aPD1aCTLA4.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MCC_GSE117988_aPD1aCTLA4.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MCC_GSE118056_aPDL1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MCC_GSE118056_aPDL1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MF_GSE173820.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MF_GSE173820.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE117156.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE117156.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE141299.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE141299.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE143317.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE143317.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MM_GSE154763.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MM_GSE154763.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "MPNST_GSE165826.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MPNST_GSE165826.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NB_GSE154037.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NB_GSE154037.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NET_GSE140312.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NET_GSE140312.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "Neurofibroma_GSE163028.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Neurofibroma_GSE163028.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NHL_GSE147944.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NHL_GSE147944.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NPC_GSE150430.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NPC_GSE150430.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_EMTAB6149.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_EMTAB6149.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE117570.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE117570.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE127471.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE127471.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE146100.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE146100.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE149655.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE149655.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE150660.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE150660.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE151537.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE151537.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE153935.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE153935.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE179373.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE179373.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "NSCLC_GSE99254.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/NSCLC_GSE99254.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE115007.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE115007.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE118828.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE118828.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE130000.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE130000.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE147082.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE147082.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE154763.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE154763.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE111672.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE111672.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE141017.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE141017.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE148673.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE148673.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE154763.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE154763.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE154778.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE154778.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE158356.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE158356.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_GSE165399.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_GSE165399.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PBMC_30K.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PBMC_30K.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PBMC_8K.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PBMC_8K.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PPB_GSE163678.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PPB_GSE163678.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PRAD_GSE141445.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PRAD_GSE141445.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PRAD_GSE143791.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PRAD_GSE143791.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PRAD_GSE150692.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PRAD_GSE150692.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PRAD_GSE176031.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PRAD_GSE176031.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SARC_GSE119352_mouse_aPD1aCTLA4.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SARC_GSE119352_mouse_aPD1aCTLA4.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SCLC_GSE150766.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SCLC_GSE150766.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SKCM_GSE120575_aPD1aCTLA4.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE120575_aPD1aCTLA4.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SKCM_GSE134388_aPD1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE134388_aPD1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SKCM_GSE166181_aPD1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE166181_aPD1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SKCM_GSE179373.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE179373.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SS_GSE131309_10X.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SS_GSE131309_10X.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SS_GSE131309_Smartseq2.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SS_GSE131309_Smartseq2.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "STAD_GSE134520.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/STAD_GSE134520.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "STAD_GSE167297.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/STAD_GSE167297.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "THCA_GSE154763.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/THCA_GSE154763.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "THCA_GSE163203.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/THCA_GSE163203.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "UCEC_GSE139555.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UCEC_GSE139555.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "UCEC_GSE154763.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UCEC_GSE154763.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "UVM_GSE138433.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE138433.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "UVM_GSE160883.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE160883.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "UVM_GSE169609.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE169609.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BCC_GSE123813_aPD1.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BCC_GSE123813_aPD1.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "BCC_GSE141526.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BCC_GSE141526.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CLL_GSE125881.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CLL_GSE125881.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CLL_GSE132065.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CLL_GSE132065.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "CRC_GSE146771_10X.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/CRC_GSE146771_10X.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "HB_GSE180665.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/HB_GSE180665.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "HNSC_GSE180268.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/HNSC_GSE180268.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "KIRC_GSE139555.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE139555.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "LIHC_GSE140228_10X.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/LIHC_GSE140228_10X.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OS_GSE162454.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OS_GSE162454.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OSCC_GSE172577.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OSCC_GSE172577.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE151214.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE151214.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "OV_GSE154600.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/OV_GSE154600.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "PAAD_CRA001160.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PAAD_CRA001160.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+        {
+            "name": "SKCM_GSE139249.pipeline",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE139249.pipeline",
+            "layers": [
+                {
+                    "name": "all",
+                    "id": "rna"
+                }
+            ],
+            "modalities": [
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "Glioma_GSE148842.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE148842.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE162631.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE162631.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "Glioma_GSE141460.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE141460.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "MB_GSE155446.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MB_GSE155446.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "Glioma_GSE163108_Smartseq2.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE163108_Smartseq2.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "MB_GSE119926.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/MB_GSE119926.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+               
+  
+      
+        {
+            "name": "Glioma_GSE103224.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE103224.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "Glioma_GSE131928_10X.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE131928_10X.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE135437.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE135437.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE138794.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE138794.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE139448.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE139448.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE163108_10X.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE163108_10X.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "Glioma_GSE70630.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE70630.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "Glioma_GSE84465.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE84465.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE89567.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE89567.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE102130.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE102130.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE131928_Smartseq2.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE131928_Smartseq2.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE141383.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE141383.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "Glioma_GSE141982.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Glioma_GSE141982.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "SKCM_GSE134388_aPD1.pipeline", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE134388_aPD1.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+        "name": "SKCM_GSE115978_aPD1.pipeline", 
+        "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE115978_aPD1.pipeline", 
+        "layers": [
+            {
+                "name": "all", 
+                "id": "rna"
+            }
+           
+        ], 
+        "modalities":[
+            "RNA"
+        ]
+        
+        },
+
+        {
+            "name": "GSE189341-acral-sc-seuratV4", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/GSE189341-acral-sc", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+    {
+            "name": "GSE189341-acral-sc-seuratV5", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/GSE189341-acral-sc-old", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+        {
+            "name": "UVM_GSE169609", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE169609", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "UVM_GSE160883", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE160883", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+    {
+            "name": "UVM_GSE138433 - Endo avail", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE138433", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE179373", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE179373", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE166181_aPD1", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE166181_aPD1", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE159251", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE159251", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE148190", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE148190", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE139249", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE139249", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE134388_aPD1 - Endo avail", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE134388_aPD1", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE123139", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE123139", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE120575_aPD1aCTLA4", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE120575_aPD1aCTLA4", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE72056 - Endo avail", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE72056", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE115978_aPD1 - Endo avail", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE115978_aPD1", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+        {
+            "name": "UVM_GSE139829 - 2 stages - update.curated", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE139829_update.curated", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                },
+                {
+                    "name": "Endothelials", 
+                    "id": "endo"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "UVM_GSE139829", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE139829", 
+            "layers": [
+                {
+                    "name": "RNA", 
+                    "id": "RNA"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+
+        {
+            "name": "KIRC_GSE159115", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE159115", 
+            "layers": [
+                {
+                    "name": "RNA", 
+                    "id": "rna"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "BRCA GSE148673", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA GSE148673", 
+            "layers": [
+                {
+                    "name": "RNA", 
+                    "id": "rna"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+         {
+            "name": "Acral melanoma CCR 2022", 
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/Acral melanoma", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                },
+                {
+                    "name": "myeloids", 
+                    "id": "myeloids"
+                },
+                {
+                    "name": "lymphoids", 
+                    "id": "lymphoids"
+                }
+
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+        {
+            "name": "multiome_discovery WNN",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/discovery_dataset",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ],
+            "zip": "linkage_discovery.zip"
+        },
+        {
+            "name": "multiome_validation",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/internal_validation",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+        {
+            "name": "multiome_PBMC",
+            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PBMC_multiome",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        }
+    ]
+}

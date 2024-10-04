@@ -1,0 +1,46 @@
+duplication dataset with the same version
+
+['Glioma_GSE102130.pipeline',
+ 'Glioma_GSE103224.pipeline',
+ 'Glioma_GSE131928_10X.pipeline',
+ 'Glioma_GSE131928_Smartseq2.pipeline',
+ 'Glioma_GSE135437.pipeline',
+ 'Glioma_GSE138794.pipeline',
+ 'Glioma_GSE139448.pipeline',
+ 'Glioma_GSE141383.pipeline',
+ 'Glioma_GSE141460.pipeline',
+ 'Glioma_GSE141982.pipeline',
+ 'Glioma_GSE148842.pipeline',
+ 'Glioma_GSE162631.pipeline',
+ 'Glioma_GSE163108_10X.pipeline',
+ 'Glioma_GSE163108_Smartseq2.pipeline',
+ 'Glioma_GSE70630.pipeline',
+ 'Glioma_GSE84465.pipeline',
+ 'Glioma_GSE89567.pipeline',
+ 'MB_GSE119926.pipeline',
+ 'MB_GSE155446.pipeline',
+ 'SKCM_GSE134388_aPD1.pipeline',
+ "multiome_discovery WNN",
+ "PBMC_multiome",
+ "internal_validation"
+ ]
+ 
+duplication datasets with different version
+
+['GSE189341-acral-sc-seuratV4',
+ 'SKCM_GSE123139',
+ 'KIRC_GSE159115',
+ 'SKCM_GSE179373',
+ 'SKCM_GSE115978_aPD1 - Endo avail',
+ 'UVM_GSE138433 - Endo avail',
+ 'UVM_GSE139829',
+ 'BRCA GSE148673',,
+ 'SKCM_GSE148190',
+ 'SKCM_GSE166181_aPD1',
+ 'UVM_GSE160883',
+ 'SKCM_GSE159251',
+ 'SKCM_GSE120575_aPD1aCTLA4',
+ 'SKCM_GSE134388_aPD1 - Endo avail',
+ 'UVM_GSE169609',
+ 'SKCM_GSE139249']
+

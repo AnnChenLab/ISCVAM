@@ -4,7 +4,7 @@ services:
   iscva-backend:
     image: "florant/iscvam-backend"
     ports:
-      - "8001:8001"
+      - "8002:8002"
     volumes:
       - "./backend/config/datasets.json:/app/datasets.json"
       - "./datasets:/app/data/datasets"
@@ -13,7 +13,7 @@ services:
   iscva-frontend:
     image: "florant/iscvam-frontend"
     ports:
-      - "3000:80"
+      - "3001:80"
     volumes:
       - "./frontend/config/app-settings.json:/usr/share/nginx/html/app-settings.json"
     depends_on:

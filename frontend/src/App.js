@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import indigo from '@mui/material/colors/indigo';
+import pink from '@mui/material/colors/pink';
+import red from '@mui/material/colors/red';
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
-import pink from '@material-ui/core/colors/pink';
-import red from '@material-ui/core/colors/red';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import Header from './Header';
 import MainPage from './MainPage';
+import Tutorial from './Tutorial';
+import About from './About';
+import Contact from './Contact';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: indigo,
     secondary: pink,
@@ -17,16 +22,41 @@ const theme = createMuiTheme({
     tonalOffset: 0.2,
   },
   typography: {
-    useNextVariants: true
-  }
+    useNextVariants: true,
+  },
 });
 
 const App = () => {
+  const [showHeader, setShowHeader] = useState(true);
+
+  const handleDatasetClick = () => {
+    setShowHeader(false); // Hide the header when a dataset is clicked
+  };
+
+  const handleShowHeader = () => {
+    setShowHeader(true); // Show the header when navigating back
+  };
+
   return (
-    <MuiThemeProvider theme={theme}>
-      <MainPage/>
-    </MuiThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Router>
+        {showHeader && <Header />} {/* Conditionally render the header */}
+        <Routes>
+          <Route
+            path="/"
+            element={<MainPage onDatasetClick={handleDatasetClick} onShowHeader={handleShowHeader} />}
+          />
+          <Route
+            path="/iscvam"
+            element={<MainPage onDatasetClick={handleDatasetClick} onShowHeader={handleShowHeader} />}
+          />
+          <Route path="/iscvam/tutorial" element={<Tutorial />} />
+          <Route path="/iscvam/about" element={<About />} />
+          <Route path="/iscvam/contact" element={<Contact />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

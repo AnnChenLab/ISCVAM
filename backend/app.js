@@ -1,12 +1,13 @@
 const cors = require('cors');
 const express = require('express')
 const app = express()
-const port = 8001;
-const host = '0.0.0.0';
+const port = 8002;
+const host = '::';
 const compression = require('compression');
+const path = require('path');
 
 app.use(cors());
-app.use(compression())
+app.use(compression());
 
 // gene sets
 var fs  = require("fs");
@@ -23,18 +24,32 @@ loadGeneSets();
 console.log(`${Object.keys(genesets).length} gene sets loaded.`);
   //{name: 'tirosh', filename: 'data/tirosh/test.h5' },
 
-var datasets = [
-    {name: 'discovery_dataset', filename: 'data/demo/test_discover_42.h5'},
-  {name: 'PBMC_multiome', filename: 'data/demo/PBMC_multiome_2.h5'},
-  {name: 'internal_validation', filename: 'data/demo/internal_validation_multiome_5.h5'}
-]
+// var datasets = [
+//     {name: 'discovery_dataset', filename: '/uufs/chpc.utah.edu/common/home/u6057318/Documents/ISCVAM_thanh_update/data/demo/test_discover_42.h5'},
+//   {name: 'PBMC_multiome', filename: '/uufs/chpc.utah.edu/common/home/u6057318/Documents/ISCVAM_thanh_update/data/demo/PBMC_multiome_2.h5'},
+//   {name: 'internal_validation', filename: '/uufs/chpc.utah.edu/common/home/u6057318/Documents/ISCVAM_thanh_update/data/demo/internal_validation_multiome_5.h5'},
+  
+// ]
+// Read the JSON file
+const jsonFilePath = path.join(__dirname, 'datasets.json');
+let datasets;
 
-var hdf5 = require('hdf5').hdf5;
-var h5lt = require('hdf5').h5lt;
-var h5tb = require('hdf5').h5tb;
-var Access = require('hdf5/lib/globals').Access;
-var H5Type = require('hdf5/lib/globals.js').H5Type;
+try {
+    const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
+    datasets = JSON.parse(jsonData);
+} catch (err) {
+    console.error('Error reading or parsing the JSON file:', err);
+    datasets = [];
+}
 
+console.log(datasets);
+//console.log('Datasets:', datasets);
+
+var hdf5 = require('hdf5.node').hdf5;
+var h5lt = require('hdf5.node').h5lt;
+var h5tb = require('hdf5.node').h5tb;
+var Access = require('hdf5.node/lib/globals').Access;
+var H5Type = require('hdf5.node/lib/globals').H5Type;
 
 /*
 function u64ArrayToU32(buffer, len) {
@@ -381,10 +396,10 @@ function lookupFeatureFromDisk(ds, feature) {
   return ret;  
 }
 
-app.get('/genesets/', (req, res) => {
+app.get('/iscvam/backend/genesets/', (req, res) => {
   res.json(Object.keys(genesets));
 });
-app.get('/project/:projectId/genesets/', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/genesets/', (req, res) => {
   res.json(Object.keys(genesets));
 });
 
@@ -427,16 +442,16 @@ const getFeatureFromDisk = (req, res) => {
 }
 
 
-app.get('/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
-app.get('/project/:projectId/gene/:geneId',  getGeneFromDisk);
-app.get('/project/:projectId/feature/:featureId',  getFeatureFromDisk);
+app.get('/iscvam/backend/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
+app.get('/iscvam/backend/project/:projectId/gene/:geneId',  getGeneFromDisk);
+app.get('/iscvam/backend/project/:projectId/feature/:featureId',  getFeatureFromDisk);
 
-app.get('/from_disk/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
-app.get('/from_disk/project/:projectId/gene/:geneId',  getGeneFromDisk);
+app.get('/iscvam/backend/from_disk/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
+app.get('/iscvam/backend/from_disk/project/:projectId/gene/:geneId',  getGeneFromDisk);
 
 
 // 
-app.get('/project/:projectId/meta', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/meta', (req, res) => {
   // console.log(data);
   //var d = data.get(req.params.projectId);
   var d = datasets.filter(r=>r.name==req.params.projectId)[0];
@@ -446,7 +461,7 @@ app.get('/project/:projectId/meta', (req, res) => {
   res.json({assays, features});
 });
 
-app.get('/project/:projectId/:artifactId/clusterings', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/:artifactId/clusterings', (req, res) => {
   // console.log(data);
   //var d = data.get(req.params.projectId);
   var ds = datasets.filter(r=>r.name==req.params.projectId)[0];
@@ -473,7 +488,7 @@ app.get('/project/:projectId/:artifactId/clusterings', (req, res) => {
   console.log(ret);
 });
 
-app.get('/project/:projectId/:artifactId/clustering/:clusteringId/:fullmatrix?', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/:artifactId/clustering/:clusteringId/:fullmatrix?', (req, res) => {
   // console.log(data);
   console.time('load clustering');
   //var d = data.get(req.params.projectId);
@@ -549,7 +564,7 @@ console.timeEnd('load clustering');
 });
 
 // project  gene
-app.get('/project/:projectId/:artifactId', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/:artifactId', (req, res) => {
   // console.log(data);
   console.time('load artifact');
   //var d = data.get(req.params.projectId);
@@ -566,7 +581,37 @@ app.get('/project/:projectId/:artifactId', (req, res) => {
   console.timeEnd('load artifact');
 });
 
+// Route for the root of your app
+app.get('/iscvam/backend', (req, res) => res.send('Hello World!'));
 
+// Route for the backend test path
+app.get('/iscvam/backend', function(req, res) {
+  res.send('Backend is working');
+});
 
-app.get('/', (req, res) => res.send('Hello World!'));
-app.listen(   port, host, () => console.log(`Example app listening on port ${port}!`));
+// Start the server on IPv6 and IPv4 (dual-stack)
+app.listen(port, '::', () => {
+  console.log(`Example app listening on all interfaces at port ${port}!`);
+});
+// Example route that should match the NGINX proxy
+app.get('/iscvam/backend/project/GSE189341-acral-sc/all', function(req, res) {
+  res.send('Data for project GSE189341-acral-sc all');
+});
+
+// app.get('/iscvam/', (req, res) => res.send('Hello World!'));
+// app.listen(   port, host, () => console.log(`Example app listening on port ${port}!`));
+// app.get('/iscvam/backend', function(req, res) {
+//   res.send('Backend is working');
+// });
+// app.listen(8002, '0.0.0.0', () => {
+//   console.log('Server is running on port 8002');
+// });
+// Handles any requests that don't match the above routes
+// app.get('/iscvam*', (req, res) => {
+//   console.log('Serving index.html');
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
+
+// app.listen(port, host, () => {
+//   console.log(`Server is running on http://${host}:${port}`);
+// });
