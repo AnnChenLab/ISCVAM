@@ -190,27 +190,7 @@
                 "RNA"
             ]
         },
-        {
-            "name": "BRCA_SRP114962.secondStage",
-            "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/BRCA_SRP114962.secondStage",
-            "layers": [
-                {
-                    "name": "all",
-                    "id": "all"
-                },
-                {
-                    "name": "Immune cells",
-                    "id": "Immune cells"
-                },
-                {
-                    "name": "Malignant cells",
-                    "id": "Malignant cells"
-                }
-            ],
-            "modalities": [
-                "RNA"
-            ]
-        },
+        
         {
             "name": "KICH_GSE159115.secondStage",
             "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KICH_GSE159115.secondStage",

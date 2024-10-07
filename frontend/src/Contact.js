@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Snackbar } from '@material-ui/core';
+import axios from 'axios';
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [formErrors, setFormErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(false);
+    const [messages, setMessages] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,19 +26,37 @@ const Contact = () => {
         return errors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const errors = validateForm();
         if (Object.keys(errors).length === 0) {
             setFormErrors({});
-            setSuccessMessage(true);
-            // Clear the form after successful submission
-            setFormData({ name: '', email: '', message: '' });
-            // You can add form submission logic here (e.g., API calls)
+            try {
+                await axios.post('https://chenlab.chpc.utah.edu/iscvam/backend/api/save-message', formData);
+                setSuccessMessage(true);
+                setFormData({ name: '', email: '', message: '' });
+                fetchMessages(); // Fetch updated messages after a new one is saved
+            } catch (error) {
+                console.error('Error saving message:', error);
+                setErrorMessage(true);
+            }
         } else {
             setFormErrors(errors);
         }
     };
+
+    const fetchMessages = async () => {
+        try {
+            const response = await axios.get('https://chenlab.chpc.utah.edu/iscvam/backend/api/messages');
+            setMessages(response.data);
+        } catch (error) {
+            console.error('Error fetching messages:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchMessages();
+    }, []);
 
     return (
         <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
@@ -92,7 +113,15 @@ const Contact = () => {
                     open={successMessage}
                     autoHideDuration={4000}
                     onClose={() => setSuccessMessage(false)}
-                    message="Message sent successfully!"
+                    message="Message saved successfully!"
+                />
+
+                {/* Error Snackbar */}
+                <Snackbar
+                    open={errorMessage}
+                    autoHideDuration={4000}
+                    onClose={() => setErrorMessage(false)}
+                    message="Failed to save the message."
                 />
             </form>
         </div>

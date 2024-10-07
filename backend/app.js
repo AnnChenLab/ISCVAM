@@ -581,6 +581,75 @@ app.get('/iscvam/backend/project/:projectId/:artifactId', (req, res) => {
   console.timeEnd('load artifact');
 });
 
+
+////// Handle the contact us
+app.use(express.json());
+// Define the file path where messages will be saved
+const filePath = path.resolve(process.cwd(), 'user_messages/messages.json');
+
+// Ensure the directory exists
+const ensureDirectoryExists = (dirPath) => {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+};
+
+// POST endpoint to save messages to a file
+app.post('/iscvam/backend/api/save-message', (req, res) => {
+  const { name, email, message } = req.body;
+
+  // Basic validation of the request body
+  if (!name || !email || !message) {
+    return res.status(400).send({ message: 'Name, email, and message are required.' });
+  }
+
+  const newMessage = {
+    name,
+    email,
+    message,
+    date: new Date().toISOString(),
+  };
+
+  // Ensure the directory exists before saving the file
+  ensureDirectoryExists(path.dirname(filePath));
+
+  // Read the existing messages from the file
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err && err.code !== 'ENOENT') {
+      return res.status(500).send({ message: 'Error reading messages', error: err });
+    }
+
+    // If the file doesn't exist or is empty, start with an empty array
+    const messages = data ? JSON.parse(data) : [];
+
+    // Add the new message to the array
+    messages.push(newMessage);
+
+    // Save the updated array back to the file
+    fs.writeFile(filePath, JSON.stringify(messages, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send({ message: 'Error saving message', error: err });
+      }
+
+      res.status(200).send({ message: 'Message saved successfully', newMessage });
+    });
+  });
+});
+
+// GET endpoint to retrieve all messages
+app.get('/iscvam/backend/api/messages', (req, res) => {
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err && err.code !== 'ENOENT') {
+      return res.status(500).send({ message: 'Error reading messages', error: err });
+    }
+
+    const messages = data ? JSON.parse(data) : [];
+    res.status(200).send(messages);
+  });
+});
+
+
+
 // Route for the root of your app
 app.get('/iscvam/backend', (req, res) => res.send('Hello World!'));
 

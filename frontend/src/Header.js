@@ -39,7 +39,7 @@ const Header = () => {
           right:'25vw',  // Adjust this value to change the horizontal position
           width: '150px',  // Set the width of the image container
           height: '120px',  // Set the height of the image container
-          backgroundImage: 'url(image.png)',  // Add your image path here
+          backgroundImage: 'url(/image.png)',  // Add your image path here
           backgroundSize: 'contain',  // Make sure the image fits the container
           backgroundRepeat: 'no-repeat',  // Prevent the image from repeating
           opacity: 0.7,  // Set transparency for the image
@@ -55,7 +55,7 @@ const Header = () => {
           right:'23vw',  // Adjust this value to change the horizontal position
           width: '150px',  // Set the width of the image container
           height: '120px',  // Set the height of the image container
-          backgroundImage: 'url(image.png)',  // Add your image path here
+          backgroundImage: 'url(/image.png)',  // Add your image path here
           backgroundSize: 'contain',  // Make sure the image fits the container
           backgroundRepeat: 'no-repeat',  // Prevent the image from repeating
           opacity: 0.6,  // Set transparency for the image
@@ -71,7 +71,7 @@ const Header = () => {
           left:'24.5vw',  // Adjust this value to change the horizontal position
           width: '150px',  // Set the width of the image container
           height: '120px',  // Set the height of the image container
-          backgroundImage: 'url(logo.svg)',  // Add your image path here
+          backgroundImage: 'url(/logo.svg)',  // Add your image path here
           backgroundSize: 'contain',  // Make sure the image fits the container
           backgroundRepeat: 'no-repeat',  // Prevent the image from repeating
           opacity: 0.6,  // Set transparency for the image
@@ -84,7 +84,7 @@ const Header = () => {
           ISCVAM: Interactive Single Cell Visual Analytics for Multiomics
         </Typography>
         <Tabs value={value()} centered style={{ width: '100%' }}>
-          <Tab label="Home" component={Link} to="/" style={{ color: 'white' }} />
+          <Tab label="Home" component={Link} to="/iscvam" style={{ color: 'white' }} />
           <Tab label="Tutorial" component={Link} to="/iscvam/tutorial" style={{ color: 'white' }} />
           <Tab label="About" component={Link} to="/iscvam/about" style={{ color: 'white' }} />
           <Tab label="Contact" component={Link} to="/iscvam/contact" style={{ color: 'white' }} />
