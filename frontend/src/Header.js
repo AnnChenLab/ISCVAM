@@ -69,13 +69,12 @@ const Header = () => {
           position: 'absolute',
           top: '0',
           left:'24.5vw',  // Adjust this value to change the horizontal position
-          width: '150px',  // Set the width of the image container
+          width: '120px',  // Set the width of the image container
           height: '120px',  // Set the height of the image container
-          backgroundImage: 'url(/logo.svg)',  // Add your image path here
+          backgroundImage: 'url(/heatmap_capture.png)',  // Add your image path here
           backgroundSize: 'contain',  // Make sure the image fits the container
           backgroundRepeat: 'no-repeat',  // Prevent the image from repeating
-          opacity: 0.6,  // Set transparency for the image
-          transform: 'rotate(30deg)',  // Rotate the image by 15 degrees
+          opacity: 0.8,  // Set transparency for the image
           zIndex: '-1',  // Ensure the image stays behind the header content
         }}
       />

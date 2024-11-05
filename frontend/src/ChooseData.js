@@ -19,7 +19,7 @@ const styles = (theme) => ({
     margin: '0 auto', // Center the root content
   },
   searchInput: {
-     marginBottom: '16px', // Add margin below the search input
+    marginBottom: '16px', // Add margin below the search input
     width: '100%',
   },
   tableRow: {
@@ -50,10 +50,11 @@ const ChooseData = ({
   datasets,
   versions,
   onGroupClick,
-  onDatasetSelect = () => {}  // Provide a default no-op function to avoid undefined errors
+  onDatasetSelect = () => {} // Provide a default no-op function to avoid undefined errors
 }) => {
   const [cursor, setCursor] = useState('grab');
   const [searchTerm, setSearchTerm] = useState(''); // Search term state
+  const [expandedGroups, setExpandedGroups] = useState({}); // State to track expanded groups
 
   const handleDatasetSelect = (datasetIndex) => {
     setCursor('wait');
@@ -65,7 +66,15 @@ const ChooseData = ({
     setSearchTerm(event.target.value.toLowerCase()); // Store the lowercase version of the search term
   };
 
-  const datasetsWithOrgan = datasets.map(dataset => ({
+  // Toggle the expand/collapse state of a group
+  const handleGroupClick = (groupName) => {
+    setExpandedGroups((prevState) => ({
+      ...prevState,
+      [groupName]: !prevState[groupName], // Toggle expand/collapse for the clicked group
+    }));
+  };
+
+  const datasetsWithOrgan = datasets.map((dataset) => ({
     ...dataset,
     organ: dataset.organ || '',
   }));
@@ -80,12 +89,53 @@ const ChooseData = ({
     return 0;
   });
 
-  // Filter datasets based on search term
-  const filteredDatasets = sortedDatasets.filter(({ organ, name }) => {
-    const organMatch = organ.toLowerCase().includes(searchTerm);
-    const nameMatch = name.toLowerCase().includes(searchTerm);
-    return organMatch || nameMatch;
-  });
+  const filteredDatasets = sortedDatasets.reduce((result, { organ, displayName, isGroup, datasets: groupDatasets }) => {
+    const searchTermRegex = new RegExp(searchTerm, 'i'); // Case-insensitive search term
+    const organMatch = searchTermRegex.test(organ); // Match for organ name
+    const groupNameMatch = searchTermRegex.test(displayName); // Match for group name
+  
+    if (isGroup) {
+      if (searchTerm) {
+        // If there's a search term, filter datasets within the group based on individual dataset names
+        const matchingDatasets = groupDatasets.filter((dataset) =>
+          searchTermRegex.test(dataset.name) // Match individual dataset names
+        );
+  
+        // If there's a match in the organ name, group name, or datasets, include this group
+        if (organMatch || groupNameMatch || matchingDatasets.length > 0) {
+          result.push({
+            organ,
+            displayName, // Group name
+            isGroup,
+            datasets: matchingDatasets.length > 0 ? matchingDatasets : groupDatasets, // Show matching datasets or all if organ/group matches
+            expanded: true, // Auto-expand group when filtering
+          });
+        }
+      } else {
+        // No search term, allow the group to be expanded/collapsed based on the state
+        result.push({
+          organ,
+          displayName, // Group name
+          isGroup,
+          datasets: groupDatasets, // Show all datasets when no search term
+          expanded: expandedGroups[displayName] || false, // Keep current expand/collapse state from the state
+        });
+      }
+    } else if (organMatch || groupNameMatch) {
+      // If there's a match on the organ or group name, show the entire group
+      result.push({
+        organ,
+        displayName,
+        isGroup,
+        datasets: groupDatasets,
+        expanded: expandedGroups[displayName] || false,
+      });
+    }
+  
+    return result;
+  }, []);
+  
+  
 
   return (
     <div className={classes.root}>
@@ -103,7 +153,7 @@ const ChooseData = ({
       <Table className={classes.table}>
         <TableHead>
           <TableRow className={classes.stickyHeader}>
-            <TableCell>organ</TableCell> 
+            <TableCell>organ/site</TableCell>
             <TableCell>dataset</TableCell>
             <TableCell>layers</TableCell>
             <TableCell>modalities</TableCell>
@@ -130,24 +180,20 @@ const ChooseData = ({
                   hover
                   onClick={() => {
                     if (isGroup) {
-                      onGroupClick(name);
+                      handleGroupClick(displayName); // Toggle expand/collapse state on group click
                     } else {
                       handleDatasetSelect(index);
                     }
                   }}
                 >
-                  <TableCell>{isGroup ? organ : ''}</TableCell> 
+                  <TableCell>{isGroup ? organ : ''}</TableCell>
                   <TableCell>
                     {isGroup
                       ? `${expanded ? '-' : '+'} ${displayName}`
                       : name}
-                  </TableCell> 
-                  <TableCell>
-                    {isGroup ? '' : layers.length}
                   </TableCell>
-                  <TableCell>
-                    {isGroup ? '' : modalities.length}
-                  </TableCell>
+                  <TableCell>{isGroup ? '' : layers.length}</TableCell>
+                  <TableCell>{isGroup ? '' : modalities.length}</TableCell>
                 </TableRow>
 
                 {isGroup &&
@@ -164,9 +210,7 @@ const ChooseData = ({
                         {dataset.name}
                       </TableCell>
                       <TableCell>{dataset.layers.length}</TableCell>
-                      <TableCell>
-                        {dataset.modalities.length}
-                      </TableCell>
+                      <TableCell>{dataset.modalities.length}</TableCell>
                     </TableRow>
                   ))}
               </Fragment>
@@ -180,8 +224,7 @@ const ChooseData = ({
       <Divider />
       <br />
       <span className={classes.buildInfo}>
-        ISCVAM v{versions.version}, &nbsp;&nbsp; revision{' '}
-        {versions.revision}
+        ISCVAM v{versions.version}, &nbsp;&nbsp; revision {versions.revision}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="https://chenlab.utah.edu/iscvam/about-iscva/">
           <i>About</i>

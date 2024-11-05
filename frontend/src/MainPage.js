@@ -46,9 +46,9 @@ const groupDatasets = (datasets) => {
 // Organ mapping
 const organMapping = {
   "Bladder": ["BLCA"],
-  "Blood": ["AEL", "AML", "ALL", "CLL", "PBMC"],
+  "Blood": ["AEL", "AML", "ALL", "CLL", "PBMC", "multiome PBMC"],
   "Bone": ["MM", "GCTB", "OS"],
-  "Brain": ["Glioma", "MB"],
+  "Brain": ["Glioma", "MB", "multiome human brain 3k"],
   "Breast": ["BRCA"],
   "Colorectum": ["CRC"],
   "Esophagus": ["ESCA"],
@@ -62,7 +62,7 @@ const organMapping = {
   "Pancreas": ["PAAD"],
   "Pelvic cavity": ["CESC", "OV", "UCEC", "multiome discovery", "multiome int.validation"],
   "Prostate": ["PRAD"],
-  "Skin": ["BCC", "MCC", "MF", "PCFCL", "SCC", "SKCM", "multiome PBMC", "GSE189341-acral-sc-seuratV5", "Acral melanoma CCR 2022"],
+  "Skin": ["BCC", "MCC", "MF", "PCFCL", "SCC", "SKCM", "GSE189341-acral-sc-seuratV5", "Acral melanoma CCR 2022"],
   "Soft tissue": ["GIST", "SARC", "PPB", "SS"],
   "Stomach": ["STAD"]
 };
