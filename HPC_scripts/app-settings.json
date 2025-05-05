@@ -1,0 +1,61 @@
+{
+  "name": "KIRC_GSE171306 adding Endo layer",
+  "url": "http://localhost:4001/iscvam/project/KIRC_GSE171306.add.Endo.layer",
+     "layers": [
+                {
+                    "name": "ALL", 
+                    "id": "all"
+                }, 
+
+                 {   "name": "IMMUNE CELLS", 
+                    "id": "Immune cells"
+                }, 
+
+                {    "name": "MALIGNANT CELLS", 
+                    "id": "Malignant cells"
+                },
+               
+                {    "name": "STROMAL CELLS", 
+                    "id": "Stromal cells"
+                } ,
+
+                {    "name": "ENDOTHELIALS CELLS", 
+                    "id": "Endothelial cells"
+                }
+
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+}, 
+
+ {
+            "name": "KIRC_GSE159115 adding Endo layer", 
+            "url": "http://localhost:4001/iscvam/project/KIRC_GSE159115.add.Endo.layer", 
+            "layers": [
+                {
+                    "name": "ALL", 
+                    "id": "all"
+                }, 
+
+                 {   "name": "IMMUNE CELLS", 
+                    "id": "Immune cells"
+                }, 
+
+                {    "name": "MALIGNANT CELLS", 
+                    "id": "Malignant cells"
+                },
+               
+                {    "name": "STROMAL CELLS", 
+                    "id": "Stromal cells"
+                } ,
+
+                {    "name": "ENDOTHELIALS CELLS", 
+                    "id": "Endothelial cells"
+                }
+
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },

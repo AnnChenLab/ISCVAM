@@ -1,5 +1,616 @@
 {
     "datasets": [
+
+ {
+            "name": "multiome human kidney",
+            "url": "http://localhost:8001/project/multiome_human_kidney",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+
+ {
+            "name": "KIRC_GSE171306 adding Endo layer", 
+            "url": "http://localhost:8001/project/KIRC_GSE171306.add.Endo.layer", 
+            "layers": [
+                {
+                    "name": "ALL", 
+                    "id": "all"
+                }, 
+
+                 {   "name": "IMMUNE CELLS", 
+                    "id": "Immune cells"
+                }, 
+
+                {    "name": "MALIGNANT CELLS", 
+                    "id": "Malignant cells"
+                },
+               
+                {    "name": "STROMAL CELLS", 
+                    "id": "Stromal cells"
+                } ,
+
+                {    "name": "ENDOTHELIALS CELLS", 
+                    "id": "Endothelial cells"
+                }
+
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+
+    {
+            "name": "KIRC_GSE159115 adding Endo layer", 
+            "url": "http://localhost:8001/project/KIRC_GSE159115.add.Endo.layer", 
+            "layers": [
+                {
+                    "name": "ALL", 
+                    "id": "all"
+                }, 
+
+                 {   "name": "IMMUNE CELLS", 
+                    "id": "Immune cells"
+                }, 
+
+                {    "name": "MALIGNANT CELLS", 
+                    "id": "Malignant cells"
+                },
+               
+                {    "name": "STROMAL CELLS", 
+                    "id": "Stromal cells"
+                } ,
+
+                {    "name": "ENDOTHELIALS CELLS", 
+                    "id": "Endothelial cells"
+                }
+
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+        {
+            "name": "multiome human brain 3k",
+            "url": "http://localhost:8001/project/multiome_human_brain_3k",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+
+          {
+            "name": "[11] KICH_GSE159115.multiStages_WITHOUT.truncatedSVD", 
+            "url": "http://localhost:8001/project/11_KICH_GSE159115.multiStages_without.truncatedSVD", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"}, 
+                {
+                    "name": "Malignant cells", 
+                    "id": "Malignant cells"
+                } 
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+          {
+            "name": "[11] KICH_GSE159115.multiStages_truncatedSVD", 
+            "url": "http://localhost:8001/project/11_KICH_GSE159115.multiStages", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"}, 
+                {
+                    "name": "Malignant cells", 
+                    "id": "Malignant cells"
+                } 
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+            {
+            "name": "[15] NSCLC_GSE151537.multiStages", 
+            "url": "http://localhost:8001/project/15_NSCLC_GSE151537.multiStages", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"}, 
+                {
+                    "name": "Immune cells", 
+                    "id": "Immune cells"
+                } 
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "NSCLC_GSE127471.multiStages", 
+            "url": "http://localhost:8001/project/NSCLC_GSE127471.multiStages", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"}, 
+                {
+                    "name": "Immune cells", 
+                    "id": "Immune cells"
+                }, 
+                {
+                    "name": "Others", 
+                    "id": "Others"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "multiome_discovery test",
+            "url": "http://localhost:8001/project/multiome_discovery",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+
+
+        {
+            "name": "multiome_int.validation test",
+            "url": "http://localhost:8001/project/multiome_int.validation",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+
+        {
+            "name": "multiome PBMC_test",
+            "url": "http://localhost:8001/project/multiome_PBMC",
+            "layers": [
+                {
+                    "name": "RNA",
+                    "id": "rna"
+                },
+                {
+                    "name": "ATAC",
+                    "id": "atac"
+                },
+                {
+                    "name": "WNN",
+                    "id": "wnn"
+                }
+            ],
+            "modalities": [
+                "RNA",
+                "ATAC"
+            ]
+        },
+         {
+            "name": "Glioma_GSE102130.pipeline", 
+            "url": "http://localhost:8001/project/Glioma_GSE102130.pipeline.h5", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE115978_aPD1.pipeline", 
+            "url": "http://localhost:8001/project/SKCM_GSE115978_aPD1.pipeline", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "rna"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+    {
+            "name": "GSE189341-acral-sc-seuratV4", 
+            "url": "http://localhost:8001/project/GSE189341-acral-sc", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+    {
+            "name": "GSE189341-acral-sc-seuratV5", 
+            "url": "http://localhost:8001/project/GSE189341-acral-sc-old", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+        {
+            "name": "UVM_GSE169609", 
+            "url": "http://localhost:8001/project/UVM_GSE169609", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "UVM_GSE160883", 
+            "url": "http://localhost:8001/project/UVM_GSE160883", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+    {
+            "name": "UVM_GSE138433 - Endo avail", 
+            "url": "http://localhost:8001/project/UVM_GSE138433", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE179373", 
+            "url": "http://localhost:8001/project/SKCM_GSE179373", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE166181_aPD1", 
+            "url": "http://localhost:8001/project/SKCM_GSE166181_aPD1", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE159251", 
+            "url": "http://localhost:8001/project/SKCM_GSE159251", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE148190", 
+            "url": "http://localhost:8001/project/SKCM_GSE148190", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+         {
+            "name": "SKCM_GSE139249", 
+            "url": "http://localhost:8001/project/SKCM_GSE139249", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE134388_aPD1 - Endo avail", 
+            "url": "http://localhost:8001/project/SKCM_GSE134388_aPD1", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE123139", 
+            "url": "http://localhost:8001/project/SKCM_GSE123139", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE120575_aPD1aCTLA4", 
+            "url": "http://localhost:8001/project/SKCM_GSE120575_aPD1aCTLA4", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE72056 - Endo avail", 
+            "url": "http://localhost:8001/project/SKCM_GSE72056", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "SKCM_GSE115978_aPD1 - Endo avail", 
+            "url": "http://localhost:8001/project/SKCM_GSE115978_aPD1", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                }
+               
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+        {
+            "name": "UVM_GSE139829 - 2 stages - update.curated", 
+            "url": "http://localhost:8001/project/UVM_GSE139829_update.curated", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                },
+                {
+                    "name": "Endothelials", 
+                    "id": "endo"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+        {
+            "name": "UVM_GSE139829", 
+            "url": "http://localhost:8001/project/UVM_GSE139829", 
+            "layers": [
+                {
+                    "name": "RNA", 
+                    "id": "RNA"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+
+        {
+            "name": "KIRC_GSE159115", 
+            "url": "http://localhost:8001/project/KIRC_GSE159115", 
+            "layers": [
+                {
+                    "name": "RNA", 
+                    "id": "rna"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+        {
+            "name": "BRCA GSE148673", 
+            "url": "http://localhost:8001/project/BRCA GSE148673", 
+            "layers": [
+                {
+                    "name": "RNA", 
+                    "id": "rna"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
+
+         {
+            "name": "Acral melanoma CCR 2022", 
+            "url": "http://localhost:8001/project/Acral melanoma", 
+            "layers": [
+                {
+                    "name": "all", 
+                    "id": "all"
+                },
+                {
+                    "name": "myeloids", 
+                    "id": "myeloids"
+                },
+                {
+                    "name": "lymphoids", 
+                    "id": "lymphoids"
+                }
+
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        },
+
+
+
+        {
+            "name": "Smalley project", 
+            "url": "http://localhost:8001/project/Smalley project", 
+            "layers": [
+                {
+                    "name": "RNA", 
+                    "id": "rna"
+                }
+            ], 
+            "modalities":[
+                "RNA"
+            ]
+        }, 
         {
             "name": "multiome discovery WNN",
             "url": "http://localhost:8001/project/discovery_dataset",
