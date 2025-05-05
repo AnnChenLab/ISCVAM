@@ -99,18 +99,7 @@
     "name": "Smalley project",
     "filename": "/uufs/chpc.utah.edu/common/home/ychen-group1/ISCVAM_thanh_update/orchestration/docker_files/compose/datasets/Smalley_update_h5.h5"
   },
-  {
-    "name": "multiome_discovery",
-    "filename": "/uufs/chpc.utah.edu/common/home/ychen-group1/ISCVAM_complied_h5/discovery.github.h5"
-  },
-  {
-    "name": "multiome_int.validation",
-    "filename": "/uufs/chpc.utah.edu/common/home/ychen-group1/ISCVAM_complied_h5/int.validation_github.test.h5"
-  },
-  {
-    "name": "multiome_PBMC",
-    "filename": "/uufs/chpc.utah.edu/common/home/ychen-group1/ISCVAM_complied_h5/PBMC_multiome_github.h5"
-  },
+
   {
     "name": "multiome_human_brain_3k",
     "filename": "/uufs/chpc.utah.edu/common/home/ychen-group1/ISCVAM_complied_h5/multiome/multiome_human_brain_3k.h5"
@@ -440,8 +429,8 @@
     "filename": "/uufs/chpc.utah.edu/common/home/ychen-group1/ISCVAM_complied_h5/secondStage/Oct23/KIRC_GSE159115.secondStage.h5"
 },
 {
-    "name": "KIRC_GSE171306.secondStage",
-    "filename": "/uufs/chpc.utah.edu/common/home/ychen-group1/ISCVAM_complied_h5/secondStage/Oct23/KIRC_GSE171306.secondStage.h5"
+    "name": "KIRC_GSE171306",
+    "filename": "/uufs/chpc.utah.edu/common/home/u6057318/Documents/ISCVAM_thanh_update/data/demo/KIRC_GSE171306.add.Endo.layer.h5"
 },
 {
     "name": "LIHC_GSE125449_aPDL1aCTLA4.secondStage",

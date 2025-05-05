@@ -2,31 +2,39 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Tabs, Tab } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 
-const Header = () => {
-  const location = useLocation();
-  const currentPath = location.pathname;
+const PUBLIC = process.env.PUBLIC_URL;
 
-  // Determine which tab should be selected based on the current path
-  const value = () => {
-    switch (currentPath) {
-      case '/iscvam/tutorial':
+const Header = () => {
+  const { pathname } = useLocation();
+
+  // Strip off any trailing slash for matching
+  const cleanPath = pathname.endsWith('/') && pathname !== '/' 
+    ? pathname.slice(0, -1) 
+    : pathname;
+
+  // Map the current (basename‑stripped) pathname to a tab index
+  const tabIndex = (() => {
+    switch (cleanPath) {
+      case '/':
+        return 0;
+      case '/tutorial':
         return 1;
-      case '/iscvam/about':
+      case '/about':
         return 2;
-      case '/iscvam/contact':
+      case '/contact':
         return 3;
       default:
         return 0;
     }
-  };
+  })();
 
   return (
     <AppBar 
       position="static" 
       style={{ 
         backgroundColor: 'rgba(42, 77, 143, 1)', 
-        minHeight: '120px',  // Increase the height of the header
-        position: 'relative',  // Ensure the header is the reference for absolute positioning
+        minHeight: '120px',  
+        position: 'relative',  
       }}
     >
       {/* Background image added using ::before */}
@@ -39,7 +47,7 @@ const Header = () => {
           right:'25vw',  // Adjust this value to change the horizontal position
           width: '150px',  // Set the width of the image container
           height: '120px',  // Set the height of the image container
-          backgroundImage: 'url(/image.png)',  // Add your image path here
+          backgroundImage: `url(${PUBLIC}/image.png)`,  // Add your image path here
           backgroundSize: 'contain',  // Make sure the image fits the container
           backgroundRepeat: 'no-repeat',  // Prevent the image from repeating
           opacity: 0.7,  // Set transparency for the image
@@ -55,7 +63,7 @@ const Header = () => {
           right:'23vw',  // Adjust this value to change the horizontal position
           width: '150px',  // Set the width of the image container
           height: '120px',  // Set the height of the image container
-          backgroundImage: 'url(/image.png)',  // Add your image path here
+          backgroundImage: `url(${PUBLIC}/image.png)`,  // Add your image path here
           backgroundSize: 'contain',  // Make sure the image fits the container
           backgroundRepeat: 'no-repeat',  // Prevent the image from repeating
           opacity: 0.6,  // Set transparency for the image
@@ -71,22 +79,47 @@ const Header = () => {
           left:'24.5vw',  // Adjust this value to change the horizontal position
           width: '120px',  // Set the width of the image container
           height: '120px',  // Set the height of the image container
-          backgroundImage: 'url(/heatmap_capture.png)',  // Add your image path here
+          backgroundImage: `url(${PUBLIC}/heatmap_capture.png)`,  // Add your image path here
           backgroundSize: 'contain',  // Make sure the image fits the container
           backgroundRepeat: 'no-repeat',  // Prevent the image from repeating
           opacity: 0.8,  // Set transparency for the image
           zIndex: '-1',  // Ensure the image stays behind the header content
         }}
       />
+
+      {/* (your pseudo-element divs here) */}
       <Toolbar style={{ justifyContent: 'center', flexDirection: 'column' }}>
-        <Typography variant="h6" style={{ color: 'white', textAlign: 'center', marginBottom: '10px', marginTop: '30px' }}>
+        <Typography 
+          variant="h6" 
+          style={{ color: 'white', textAlign: 'center', marginBottom: 10, marginTop: 30 }}
+        >
           ISCVAM: Interactive Single Cell Visual Analytics for Multiomics
         </Typography>
-        <Tabs value={value()} centered style={{ width: '100%' }}>
-          <Tab label="Home" component={Link} to="/iscvam" style={{ color: 'white' }} />
-          <Tab label="Tutorial" component={Link} to="/iscvam/tutorial" style={{ color: 'white' }} />
-          <Tab label="About" component={Link} to="/iscvam/about" style={{ color: 'white' }} />
-          <Tab label="Contact" component={Link} to="/iscvam/contact" style={{ color: 'white' }} />
+        <Tabs value={tabIndex} centered style={{ width: '100%' }}>
+          <Tab 
+            label="Home" 
+            component={Link} 
+            to="/" 
+            style={{ color: 'white' }} 
+          />
+          <Tab 
+            label="Tutorial" 
+            component={Link} 
+            to="/tutorial" 
+            style={{ color: 'white' }} 
+          />
+          <Tab 
+            label="About" 
+            component={Link} 
+            to="/about" 
+            style={{ color: 'white' }} 
+          />
+          <Tab 
+            label="Contact" 
+            component={Link} 
+            to="/contact" 
+            style={{ color: 'white' }} 
+          />
         </Tabs>
       </Toolbar>
     </AppBar>

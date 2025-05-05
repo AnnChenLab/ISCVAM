@@ -8,48 +8,50 @@ const path = require('path');
 
 app.use(cors());
 app.use(compression());
-
 // gene sets
-var fs  = require("fs");
-var genesets={}
-function loadGeneSets() {
-  var path = "./genesets/msigdb.v6.2.symbols.gmt";
-  var lines = fs.readFileSync(path).toString().split('\n');
-  lines.forEach( line => {
-    var tokens = line.split('\t');
-    genesets[tokens[0]] = {genes:tokens.slice(2),url:tokens[1]};
-  });
+const fs  = require("fs");
+const genesetFile = "./genesets/msigdb.v2023.1.Hs.json";
+let genesetsRaw = JSON.parse(fs.readFileSync(genesetFile));
+
+let genesets = {};
+
+for (const [id, {collection, geneSymbols}] of Object.entries(genesetsRaw)) {
+    genesets[id] = { genes: geneSymbols };
 }
-loadGeneSets();
+
+let genesetsDirectory = {};
+
+for (const [id, {collection}] of Object.entries(genesetsRaw)) {
+    if (!genesetsDirectory[collection]) {
+        genesetsDirectory[collection] = [];
+    }
+    genesetsDirectory[collection].push(id);
+}
+
+// function loadGeneSets() {
+//   var path = "./genesets/msigdb.v6.2.symbols.gmt";
+//   var lines = fs.readFileSync(path).toString().split('\n');
+//   lines.forEach( line => {
+//     var tokens = line.split('\t');
+//     genesets[tokens[0]] = {genes:tokens.slice(2),url:tokens[1]};
+//   });
+// }
+// loadGeneSets();
 console.log(`${Object.keys(genesets).length} gene sets loaded.`);
   //{name: 'tirosh', filename: 'data/tirosh/test.h5' },
 
-// var datasets = [
-//     {name: 'discovery_dataset', filename: '/uufs/chpc.utah.edu/common/home/u6057318/Documents/ISCVAM_thanh_update/data/demo/test_discover_42.h5'},
-//   {name: 'PBMC_multiome', filename: '/uufs/chpc.utah.edu/common/home/u6057318/Documents/ISCVAM_thanh_update/data/demo/PBMC_multiome_2.h5'},
-//   {name: 'internal_validation', filename: '/uufs/chpc.utah.edu/common/home/u6057318/Documents/ISCVAM_thanh_update/data/demo/internal_validation_multiome_5.h5'},
-  
-// ]
-// Read the JSON file
 const jsonFilePath = path.join(__dirname, 'datasets.json');
-let datasets;
-
-try {
-    const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
-    datasets = JSON.parse(jsonData);
-} catch (err) {
-    console.error('Error reading or parsing the JSON file:', err);
-    datasets = [];
-}
+const datasets = JSON.parse(fs.readFileSync(jsonFilePath));
 
 console.log(datasets);
-//console.log('Datasets:', datasets);
+  //{name: 'tirosh', filename: 'data/tirosh/test.h5' },
 
 var hdf5 = require('hdf5.node').hdf5;
 var h5lt = require('hdf5.node').h5lt;
 var h5tb = require('hdf5.node').h5tb;
 var Access = require('hdf5.node/lib/globals').Access;
 var H5Type = require('hdf5.node/lib/globals').H5Type;
+
 
 /*
 function u64ArrayToU32(buffer, len) {
@@ -134,7 +136,13 @@ function readAssayData(assayGroup) {
     features = h5lt.readDataset(featuresGroup.id, 'name' );
     featuresGroup.close();
   }
+  console.log("Raw features value:", features);
+  console.log("Raw features type:", typeof features);
   group.close();
+    // Validate the features variable
+  console.log("Features type:", typeof features);
+  console.log("Is features an array?", Array.isArray(features));
+  console.log("Features content (first 10 items):", features.slice(0, 10));
   // var featureMap = new Map(features.map( (n,i) => [n.toUpperCase(), i]));
   var featureMap = new Map(features.map( (n,i) => [n, i]));
   return {barcodes, data, indices, indicesLen, indptr, shape, featureMap};
@@ -318,28 +326,29 @@ function lookupFromDisk(ds, gene) {
 
 function extractFeatureData(assayData, feature) {
   console.log(`extract feature data ${feature}`);
-  // console.log(assayData);
-  // console.log(assayData.featureMap);
+  //console.log(`assay Data:`, assayData);
+  //console.log('Feature map:', assayData.featureMap);
   let  {barcodes, data, indices, indicesLen, indptr, shape, featureMap}  = assayData;
-
-
+ 
+ 
   // var geneIdx = featureMap.get(feature.toUpperCase());
   var geneIdx = featureMap.get(feature);
+  console.log(`Gene index for ${feature}:`, geneIdx);
   // var matchData = [];
     // d.indices.forEach( (ind, i) => {if(ind === geneIdx) {matchData[matchData.length]=d.data[i]}});
   
   const ret = {};
   console.time('going through the barcodes');
-
+ 
   if(indices.length==indicesLen) {
     barcodes.forEach( (barcode, i) => {
-
+ 
       let total = 0;
       for(let cursor = indptr[i]; cursor < indptr[i+1]; cursor++) {
         total += data[cursor]
       }
   //    console.log(`number of genes: ${indptr[i+1]-indptr[i]+1}`);
-
+ 
       for(let cursor = indptr[i]; cursor < indptr[i+1]; cursor++) {
         let idx;
         // temporary solution to support UINT8 arrays
@@ -347,6 +356,7 @@ function extractFeatureData(assayData, feature) {
   //      console.log(idx);       
         //if(indices[cursor]==geneIdx) {
         if(idx==geneIdx) {
+          //console.log(`Matching gene index found for ${feature}:`, geneIdx);
           ret[barcode] = Math.log1p(data[cursor]/total*10000);
           break;
         }
@@ -367,16 +377,54 @@ function extractFeatureData(assayData, feature) {
         idx = indices.readUInt32LE(cursor*8);
         if(idx==geneIdx) {
           ret[barcode] = Math.log1p(data[cursor]/total*10000);
+          //console.log(`Value for ${barcode}:`, ret[barcode]);
           break;
         }
       }
     })
   }
   console.timeEnd('going through the barcodes');
+  // After all calculations are complete, print the full result as a table.
+  console.log('Full result as a table:');
+  console.table(
+    Object.entries(ret)
+    .slice(0, 20)
+    .map(([barcode, value]) => ({ Barcode: barcode, Value: value }))
+  );
+  return ret;
+}
+ 
+
+
+function lookupFeatureFromAssayFromDisk(ds, feature, assay) {
+  const dataCache = loadDataset(ds);
+  console.log(`lookupFeatureFromAssayFromDisk`);
+  console.log(ds);
+  console.assert('assays' in dataCache);
+  // search for feature
+  const ret = {};
+ // if(dataCache[assay])
+  if(dataCache.assays.includes(assay)) 
+    if(dataCache.assaysData[assay].featureMap.has(feature))
+      ret[assay]=extractFeatureData(dataCache.assaysData[assay], feature);
   return ret;
 }
 
+const getFeatureFromAssayFromDisk = (req, res) => {
+  // console.log(data);
+  console.time('lookup feature from disk');
+  var d = datasets.filter(r=>r.name==req.params.projectId)[0];
 
+
+  // prior routine: request - loadds (from cache if available) - do data look up
+  // current routine: request - loadds (from cache if available) - do data look up
+
+  var feature = req.params.featureId;
+  var assay = req.params.assayId;
+  var ret = lookupFeatureFromAssayFromDisk(d, feature, assay);
+  console.timeEnd('lookup feature from disk');
+  res.json(ret);
+}
 
 
 function lookupFeatureFromDisk(ds, feature) {
@@ -403,6 +451,12 @@ app.get('/iscvam/backend/project/:projectId/genesets/', (req, res) => {
   res.json(Object.keys(genesets));
 });
 
+app.get('/iscvam/backend/genesetsDirectory/', (req, res) => {
+  res.json(genesetsDirectory);
+});
+app.get('/iscvam/backend/project/:projectId/genesetsDirectory/', (req, res) => {
+  res.json(genesetsDirectory);
+});
 
 const getGenesetFromDisk = (req,res) => {
   console.time('lookup gene set from disk');
@@ -566,11 +620,11 @@ console.timeEnd('load clustering');
 // project  gene
 app.get('/iscvam/backend/project/:projectId/:artifactId', (req, res) => {
   // console.log(data);
-  console.time('load artifact');
+  //console.time(`load artifact ${req.params.artifactId}`);
   //var d = data.get(req.params.projectId);
   var d = datasets.filter(r=>r.name==req.params.projectId)[0];
-  console.log(`load artifact`);
-  console.log(d);
+  // console.log(`load artifact`);
+  // console.log(d);
   let  {artifacts}  = loadDataset(d);
   // let  {pcs, covs, continuousCovs, discreteCovs}  = artifacts[req.params.artifactId];
   let  {covs, continuousCovs, discreteCovs}  = artifacts[req.params.artifactId];
@@ -578,10 +632,15 @@ app.get('/iscvam/backend/project/:projectId/:artifactId', (req, res) => {
   covs=covs.reduce( (m,o) => {m[o.name]=Array.prototype.slice.call(o);return m}, {});
   // res.json({pcs,covs,discreteCovs,continuousCovs});
   res.json({covs,discreteCovs,continuousCovs});
-  console.timeEnd('load artifact');
+  // console.log(artifacts[req.params.artifactId]);
+  //console.timeEnd(`done loading artifact ${req.params.artifactId}`);
+  // console.timeEnd('load artifact');
 });
 
+app.get('/iscvam/backend/project/:projectId/:assayId/:featureId',  getFeatureFromAssayFromDisk);
 
+
+// #########################USER MANAGEMENT PART####################
 ////// Handle the contact us
 app.use(express.json());
 // Define the file path where messages will be saved

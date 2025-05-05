@@ -1726,28 +1726,33 @@
     },
     {
       "name": "KIRC_GSE171306",
-      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE171306.secondStage",
+      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/KIRC_GSE171306",
       "layers": [
-        {
-          "name": "all",
-          "id": "all"
-        },
-        {
-          "name": "Immune cells",
-          "id": "Immune cells"
-        },
-        {
-          "name": "Malignant cells",
-          "id": "Malignant cells"
-        },
-        {
-          "name": "Stromal cells",
-          "id": "Stromal cells"
-        }
-      ],
-      "modalities": [
-        "RNA"
-      ]
+                    {
+                        "name": "ALL", 
+                        "id": "all"
+                    }, 
+    
+                     {   "name": "IMMUNE CELLS", 
+                        "id": "Immune cells"
+                    }, 
+    
+                    {    "name": "MALIGNANT CELLS", 
+                        "id": "Malignant cells"
+                    },
+                   
+                    {    "name": "STROMAL CELLS", 
+                        "id": "Stromal cells"
+                    } ,
+    
+                    {    "name": "ENDOTHELIALS CELLS", 
+                        "id": "Endothelial cells"
+                    }
+    
+                ], 
+                "modalities":[
+                    "RNA"
+                ]
     },
     {
       "name": "LIHC_GSE125449_aPDL1aCTLA4",
@@ -4157,7 +4162,7 @@
     },
     {
       "name": "multiome discovery",
-      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/multiome_discovery",
+      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/discovery_dataset",
       "layers": [
         {
           "name": "RNA",
@@ -4179,7 +4184,7 @@
     },
     {
       "name": "multiome int.validation",
-      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/multiome_int.validation",
+      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/internal_validation",
       "layers": [
         {
           "name": "RNA",
@@ -4201,7 +4206,7 @@
     },
     {
       "name": "multiome PBMC",
-      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/multiome_PBMC",
+      "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/PBMC_multiome",
       "layers": [
         {
           "name": "RNA",

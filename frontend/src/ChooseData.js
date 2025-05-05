@@ -226,8 +226,8 @@ const ChooseData = ({
       <span className={classes.buildInfo}>
         ISCVAM v{versions.version}, &nbsp;&nbsp; revision {versions.revision}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://chenlab.utah.edu/iscvam/about-iscva/">
-          <i>About</i>
+        <a href="https://medicine.utah.edu/internal-medicine/epidemiology/chen-lab">
+          <i>Created by Chen Lab</i>
         </a>
       </span>
     </div>

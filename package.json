@@ -1,7 +1,0 @@
-{
-    "private": true,
-    "workspaces": [
-        "backend",
-        "hdf5.node"
-    ]
-}

@@ -5,7 +5,7 @@ import indigo from '@mui/material/colors/indigo';
 import pink from '@mui/material/colors/pink';
 import red from '@mui/material/colors/red';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './Header';
 import MainPage from './MainPage';
@@ -30,33 +30,35 @@ const App = () => {
   const [showHeader, setShowHeader] = useState(true);
 
   const handleDatasetClick = () => {
-    setShowHeader(false); // Hide the header when a dataset is clicked
+    setShowHeader(false);
   };
 
   const handleShowHeader = () => {
-    setShowHeader(true); // Show the header when navigating back
+    setShowHeader(true);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        {showHeader && <Header />} {/* Conditionally render the header */}
+      <Router basename="/iscvam">
+        {showHeader && <Header />}
         <Routes>
-          <Route
-            path="/"
-            element={<MainPage onDatasetClick={handleDatasetClick} onShowHeader={handleShowHeader} />}
+          <Route 
+            index 
+            element={
+              <MainPage
+                onDatasetClick={handleDatasetClick}
+                onShowHeader={handleShowHeader}
+              />
+            }
           />
-          <Route
-            path="/iscvam"
-            element={<MainPage onDatasetClick={handleDatasetClick} onShowHeader={handleShowHeader} />}
-          />
-          <Route path="/iscvam/tutorial" element={<Tutorial />} />
-          <Route path="/iscvam/about" element={<About />} />
-          <Route path="/iscvam/contact" element={<Contact />} />
+          <Route path="tutorial" element={<Tutorial />} />
+          <Route path="about"    element={<About    />} />
+          <Route path="contact"  element={<Contact  />} />
         </Routes>
       </Router>
     </ThemeProvider>
   );
+  
 };
 
 export default App;

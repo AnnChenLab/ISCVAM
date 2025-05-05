@@ -1,0 +1,36 @@
+[
+    {
+    "name": "AEL_GSE142213.secondStage",
+    "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/AEL_GSE142213.secondStage",
+    "layers": [
+        {
+            "name": "all",
+            "id": "all"
+        },
+        {
+            "name": "Immune cells",
+            "id": "Immune cells"
+        },
+        {
+            "name": "Malignant cells",
+            "id": "Malignant cells"
+        }
+    ],
+    "modalities": [
+        "RNA"
+    ]
+    },
+    {
+    "name": "AEL_GSE142213.pipeline",
+    "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/AEL_GSE142213.pipeline",
+    "layers": [
+    {
+        "name": "all",
+        "id": "rna"
+    }
+    ],
+    "modalities": [
+    "RNA"
+    ]
+    }
+]

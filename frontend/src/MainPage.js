@@ -143,22 +143,29 @@ const MainPage = ({ onDatasetClick, onShowHeader, classes }) => {
   return (
     <div className="App">
       {state.initialDatasetIdx === null ? (
-        <ChooseData
-          onDatasetSelect={handleDatasetSelect}
-          datasets={Object.keys(state.groupedDatasets).map(prefix => ({
-            displayName: `${prefix} (${state.groupedDatasets[prefix].length})`,
-            organ: geneToOrgan[prefix],
-            name: prefix,
-            layers: [],
-            modalities: [],
-            reference: null,
-            isGroup: true,
-            datasets: state.groupedDatasets[prefix],
-            expanded: state.expandedGroups[prefix] || false,
-          }))}
-          versions={versions}
-          onGroupClick={toggleGroupExpansion}
-        />
+        <div>
+          <p style={{ fontSize: '16px', margin: '20px 240px', textAlign: 'center' }}>
+            <strong>ISCVAM</strong> is a fast, interactive tool for analyzing scRNA-seq and multimodal datasets, <br></br>  
+            including <strong>6,300,000+</strong> single cells across <strong>198</strong> studies (190 from TISCH).  
+            It’s built in JavaScript for smooth visualization and analysis.
+          </p>
+          <ChooseData
+            onDatasetSelect={handleDatasetSelect}
+            datasets={Object.keys(state.groupedDatasets).map(prefix => ({
+              displayName: `${prefix} (${state.groupedDatasets[prefix].length})`,
+              organ: geneToOrgan[prefix],
+              name: prefix,
+              layers: [],
+              modalities: [],
+              reference: null,
+              isGroup: true,
+              datasets: state.groupedDatasets[prefix],
+              expanded: state.expandedGroups[prefix] || false,
+            }))}
+            versions={versions}
+            onGroupClick={toggleGroupExpansion}
+          />
+        </div>
       ) : (
         <div>
           <ScDataViewer
