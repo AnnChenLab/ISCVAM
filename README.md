@@ -1,4 +1,4 @@
-# ISCVAM - *I*nteractive *S*ingle *C*ell *V*isual *A*nalytics for *M*ultiomics
+# ISCVAM - Interactive Single Cell Visual Analytics for Multiomics
 
 ## About
 
