@@ -1,1 +1,1 @@
-docker run -it --name iscvam-backend -p 8001:8001 iscvam-backend sh
+docker run -it --name iscvam-backend -p 8002:8002 iscvam-backend sh

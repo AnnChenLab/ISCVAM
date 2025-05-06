@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import indigo from '@mui/material/colors/indigo';
+import pink from '@mui/material/colors/pink';
+import red from '@mui/material/colors/red';
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
-import pink from '@material-ui/core/colors/pink';
-import red from '@material-ui/core/colors/red';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import Header from './Header';
 import MainPage from './MainPage';
+import Tutorial from './Tutorial';
+import About from './About';
+import Contact from './Contact';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: indigo,
     secondary: pink,
@@ -17,16 +22,43 @@ const theme = createMuiTheme({
     tonalOffset: 0.2,
   },
   typography: {
-    useNextVariants: true
-  }
+    useNextVariants: true,
+  },
 });
 
 const App = () => {
+  const [showHeader, setShowHeader] = useState(true);
+
+  const handleDatasetClick = () => {
+    setShowHeader(false);
+  };
+
+  const handleShowHeader = () => {
+    setShowHeader(true);
+  };
+
   return (
-    <MuiThemeProvider theme={theme}>
-      <MainPage/>
-    </MuiThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Router basename="/iscvam">
+        {showHeader && <Header />}
+        <Routes>
+          <Route 
+            index 
+            element={
+              <MainPage
+                onDatasetClick={handleDatasetClick}
+                onShowHeader={handleShowHeader}
+              />
+            }
+          />
+          <Route path="tutorial" element={<Tutorial />} />
+          <Route path="about"    element={<About    />} />
+          <Route path="contact"  element={<Contact  />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
-}
+  
+};
 
 export default App;

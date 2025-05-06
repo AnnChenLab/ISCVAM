@@ -1,0 +1,82 @@
+[
+  {
+    "name": "SKCM_GSE72056", 
+    "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE72056.secondStage",
+    "layers": [
+      {
+        "name": "all",
+        "id": "all"
+      },
+      {
+        "name": "Immune cells",
+        "id": "Immune cells"
+      },
+      {
+        "name": "Malignant cells",
+        "id": "Malignant cells"
+      },
+      {
+        "name": "Stromal cells",
+        "id": "Stromal cells"
+      }
+    ],
+    "modalities": [
+      "RNA"
+    ]
+  },
+  {
+    "name": "SKCM_GSE72056 - Endo avail",
+    "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/SKCM_GSE72056",
+    "layers": [
+      {
+        "name": "all",
+        "id": "all"
+      }
+    ],
+    "modalities": [
+      "RNA"
+    ]
+  },
+  {
+    "name": "UVM_GSE139829",
+    "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE139829.secondStage",
+    "layers": [
+      {
+        "name": "all",
+        "id": "all"
+      },
+      {
+        "name": "Immune cells",
+        "id": "Immune cells"
+      },
+      {
+        "name": "Malignant cells",
+        "id": "Malignant cells"
+      },
+      {
+        "name": "Stromal cells",
+        "id": "Stromal cells"
+      }
+    ],
+    "modalities": [
+      "RNA"
+    ]
+  },
+  {
+    "name": "UVM_GSE139829 - 2 stages - update.curated",
+    "url": "https://chenlab.chpc.utah.edu/iscvam/backend/project/UVM_GSE139829_update.curated",
+    "layers": [
+      {
+        "name": "all",
+        "id": "all"
+      },
+      {
+        "name": "Endothelials",
+        "id": "endo"
+      }
+    ],
+    "modalities": [
+      "RNA"
+    ]
+  }
+]

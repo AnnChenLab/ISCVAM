@@ -1,39 +1,56 @@
 const cors = require('cors');
 const express = require('express')
 const app = express()
-const port = 8001;
-const host = '0.0.0.0';
+const port = 8002;
+const host = '::';
 const compression = require('compression');
+const path = require('path');
 
 app.use(cors());
-app.use(compression())
-
+app.use(compression());
 // gene sets
-var fs  = require("fs");
-var genesets={}
-function loadGeneSets() {
-  var path = "./genesets/msigdb.v6.2.symbols.gmt";
-  var lines = fs.readFileSync(path).toString().split('\n');
-  lines.forEach( line => {
-    var tokens = line.split('\t');
-    genesets[tokens[0]] = {genes:tokens.slice(2),url:tokens[1]};
-  });
+const fs  = require("fs");
+const genesetFile = "./genesets/msigdb.v2023.1.Hs.json";
+let genesetsRaw = JSON.parse(fs.readFileSync(genesetFile));
+
+let genesets = {};
+
+for (const [id, {collection, geneSymbols}] of Object.entries(genesetsRaw)) {
+    genesets[id] = { genes: geneSymbols };
 }
-loadGeneSets();
+
+let genesetsDirectory = {};
+
+for (const [id, {collection}] of Object.entries(genesetsRaw)) {
+    if (!genesetsDirectory[collection]) {
+        genesetsDirectory[collection] = [];
+    }
+    genesetsDirectory[collection].push(id);
+}
+
+// function loadGeneSets() {
+//   var path = "./genesets/msigdb.v6.2.symbols.gmt";
+//   var lines = fs.readFileSync(path).toString().split('\n');
+//   lines.forEach( line => {
+//     var tokens = line.split('\t');
+//     genesets[tokens[0]] = {genes:tokens.slice(2),url:tokens[1]};
+//   });
+// }
+// loadGeneSets();
 console.log(`${Object.keys(genesets).length} gene sets loaded.`);
   //{name: 'tirosh', filename: 'data/tirosh/test.h5' },
 
-var datasets = [
-    {name: 'discovery_dataset', filename: 'data/demo/test_discover_42.h5'},
-  {name: 'PBMC_multiome', filename: 'data/demo/PBMC_multiome_2.h5'},
-  {name: 'internal_validation', filename: 'data/demo/internal_validation_multiome_5.h5'}
-]
+const jsonFilePath = path.join(__dirname, 'datasets.json');
+const datasets = JSON.parse(fs.readFileSync(jsonFilePath));
 
-var hdf5 = require('hdf5').hdf5;
-var h5lt = require('hdf5').h5lt;
-var h5tb = require('hdf5').h5tb;
-var Access = require('hdf5/lib/globals').Access;
-var H5Type = require('hdf5/lib/globals.js').H5Type;
+console.log(datasets);
+  //{name: 'tirosh', filename: 'data/tirosh/test.h5' },
+
+var hdf5 = require('hdf5.node').hdf5;
+var h5lt = require('hdf5.node').h5lt;
+var h5tb = require('hdf5.node').h5tb;
+var Access = require('hdf5.node/lib/globals').Access;
+var H5Type = require('hdf5.node/lib/globals').H5Type;
 
 
 /*
@@ -119,7 +136,13 @@ function readAssayData(assayGroup) {
     features = h5lt.readDataset(featuresGroup.id, 'name' );
     featuresGroup.close();
   }
+  console.log("Raw features value:", features);
+  console.log("Raw features type:", typeof features);
   group.close();
+    // Validate the features variable
+  console.log("Features type:", typeof features);
+  console.log("Is features an array?", Array.isArray(features));
+  console.log("Features content (first 10 items):", features.slice(0, 10));
   // var featureMap = new Map(features.map( (n,i) => [n.toUpperCase(), i]));
   var featureMap = new Map(features.map( (n,i) => [n, i]));
   return {barcodes, data, indices, indicesLen, indptr, shape, featureMap};
@@ -303,28 +326,29 @@ function lookupFromDisk(ds, gene) {
 
 function extractFeatureData(assayData, feature) {
   console.log(`extract feature data ${feature}`);
-  // console.log(assayData);
-  // console.log(assayData.featureMap);
+  //console.log(`assay Data:`, assayData);
+  //console.log('Feature map:', assayData.featureMap);
   let  {barcodes, data, indices, indicesLen, indptr, shape, featureMap}  = assayData;
-
-
+ 
+ 
   // var geneIdx = featureMap.get(feature.toUpperCase());
   var geneIdx = featureMap.get(feature);
+  console.log(`Gene index for ${feature}:`, geneIdx);
   // var matchData = [];
     // d.indices.forEach( (ind, i) => {if(ind === geneIdx) {matchData[matchData.length]=d.data[i]}});
   
   const ret = {};
   console.time('going through the barcodes');
-
+ 
   if(indices.length==indicesLen) {
     barcodes.forEach( (barcode, i) => {
-
+ 
       let total = 0;
       for(let cursor = indptr[i]; cursor < indptr[i+1]; cursor++) {
         total += data[cursor]
       }
   //    console.log(`number of genes: ${indptr[i+1]-indptr[i]+1}`);
-
+ 
       for(let cursor = indptr[i]; cursor < indptr[i+1]; cursor++) {
         let idx;
         // temporary solution to support UINT8 arrays
@@ -332,6 +356,7 @@ function extractFeatureData(assayData, feature) {
   //      console.log(idx);       
         //if(indices[cursor]==geneIdx) {
         if(idx==geneIdx) {
+          //console.log(`Matching gene index found for ${feature}:`, geneIdx);
           ret[barcode] = Math.log1p(data[cursor]/total*10000);
           break;
         }
@@ -352,16 +377,54 @@ function extractFeatureData(assayData, feature) {
         idx = indices.readUInt32LE(cursor*8);
         if(idx==geneIdx) {
           ret[barcode] = Math.log1p(data[cursor]/total*10000);
+          //console.log(`Value for ${barcode}:`, ret[barcode]);
           break;
         }
       }
     })
   }
   console.timeEnd('going through the barcodes');
+  // After all calculations are complete, print the full result as a table.
+  console.log('Full result as a table:');
+  console.table(
+    Object.entries(ret)
+    .slice(0, 20)
+    .map(([barcode, value]) => ({ Barcode: barcode, Value: value }))
+  );
+  return ret;
+}
+ 
+
+
+function lookupFeatureFromAssayFromDisk(ds, feature, assay) {
+  const dataCache = loadDataset(ds);
+  console.log(`lookupFeatureFromAssayFromDisk`);
+  console.log(ds);
+  console.assert('assays' in dataCache);
+  // search for feature
+  const ret = {};
+ // if(dataCache[assay])
+  if(dataCache.assays.includes(assay)) 
+    if(dataCache.assaysData[assay].featureMap.has(feature))
+      ret[assay]=extractFeatureData(dataCache.assaysData[assay], feature);
   return ret;
 }
 
+const getFeatureFromAssayFromDisk = (req, res) => {
+  // console.log(data);
+  console.time('lookup feature from disk');
+  var d = datasets.filter(r=>r.name==req.params.projectId)[0];
 
+
+  // prior routine: request - loadds (from cache if available) - do data look up
+  // current routine: request - loadds (from cache if available) - do data look up
+
+  var feature = req.params.featureId;
+  var assay = req.params.assayId;
+  var ret = lookupFeatureFromAssayFromDisk(d, feature, assay);
+  console.timeEnd('lookup feature from disk');
+  res.json(ret);
+}
 
 
 function lookupFeatureFromDisk(ds, feature) {
@@ -381,13 +444,19 @@ function lookupFeatureFromDisk(ds, feature) {
   return ret;  
 }
 
-app.get('/genesets/', (req, res) => {
+app.get('/iscvam/backend/genesets/', (req, res) => {
   res.json(Object.keys(genesets));
 });
-app.get('/project/:projectId/genesets/', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/genesets/', (req, res) => {
   res.json(Object.keys(genesets));
 });
 
+app.get('/iscvam/backend/genesetsDirectory/', (req, res) => {
+  res.json(genesetsDirectory);
+});
+app.get('/iscvam/backend/project/:projectId/genesetsDirectory/', (req, res) => {
+  res.json(genesetsDirectory);
+});
 
 const getGenesetFromDisk = (req,res) => {
   console.time('lookup gene set from disk');
@@ -427,16 +496,16 @@ const getFeatureFromDisk = (req, res) => {
 }
 
 
-app.get('/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
-app.get('/project/:projectId/gene/:geneId',  getGeneFromDisk);
-app.get('/project/:projectId/feature/:featureId',  getFeatureFromDisk);
+app.get('/iscvam/backend/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
+app.get('/iscvam/backend/project/:projectId/gene/:geneId',  getGeneFromDisk);
+app.get('/iscvam/backend/project/:projectId/feature/:featureId',  getFeatureFromDisk);
 
-app.get('/from_disk/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
-app.get('/from_disk/project/:projectId/gene/:geneId',  getGeneFromDisk);
+app.get('/iscvam/backend/from_disk/project/:projectId/geneset/:genesetId',  getGenesetFromDisk);
+app.get('/iscvam/backend/from_disk/project/:projectId/gene/:geneId',  getGeneFromDisk);
 
 
 // 
-app.get('/project/:projectId/meta', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/meta', (req, res) => {
   // console.log(data);
   //var d = data.get(req.params.projectId);
   var d = datasets.filter(r=>r.name==req.params.projectId)[0];
@@ -446,7 +515,7 @@ app.get('/project/:projectId/meta', (req, res) => {
   res.json({assays, features});
 });
 
-app.get('/project/:projectId/:artifactId/clusterings', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/:artifactId/clusterings', (req, res) => {
   // console.log(data);
   //var d = data.get(req.params.projectId);
   var ds = datasets.filter(r=>r.name==req.params.projectId)[0];
@@ -473,7 +542,7 @@ app.get('/project/:projectId/:artifactId/clusterings', (req, res) => {
   console.log(ret);
 });
 
-app.get('/project/:projectId/:artifactId/clustering/:clusteringId/:fullmatrix?', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/:artifactId/clustering/:clusteringId/:fullmatrix?', (req, res) => {
   // console.log(data);
   console.time('load clustering');
   //var d = data.get(req.params.projectId);
@@ -549,13 +618,13 @@ console.timeEnd('load clustering');
 });
 
 // project  gene
-app.get('/project/:projectId/:artifactId', (req, res) => {
+app.get('/iscvam/backend/project/:projectId/:artifactId', (req, res) => {
   // console.log(data);
-  console.time('load artifact');
+  //console.time(`load artifact ${req.params.artifactId}`);
   //var d = data.get(req.params.projectId);
   var d = datasets.filter(r=>r.name==req.params.projectId)[0];
-  console.log(`load artifact`);
-  console.log(d);
+  // console.log(`load artifact`);
+  // console.log(d);
   let  {artifacts}  = loadDataset(d);
   // let  {pcs, covs, continuousCovs, discreteCovs}  = artifacts[req.params.artifactId];
   let  {covs, continuousCovs, discreteCovs}  = artifacts[req.params.artifactId];
@@ -563,10 +632,114 @@ app.get('/project/:projectId/:artifactId', (req, res) => {
   covs=covs.reduce( (m,o) => {m[o.name]=Array.prototype.slice.call(o);return m}, {});
   // res.json({pcs,covs,discreteCovs,continuousCovs});
   res.json({covs,discreteCovs,continuousCovs});
-  console.timeEnd('load artifact');
+  // console.log(artifacts[req.params.artifactId]);
+  //console.timeEnd(`done loading artifact ${req.params.artifactId}`);
+  // console.timeEnd('load artifact');
+});
+
+app.get('/iscvam/backend/project/:projectId/:assayId/:featureId',  getFeatureFromAssayFromDisk);
+
+
+// #########################USER MANAGEMENT PART####################
+////// Handle the contact us
+app.use(express.json());
+// Define the file path where messages will be saved
+const filePath = path.resolve(process.cwd(), 'user_messages/messages.json');
+
+// Ensure the directory exists
+const ensureDirectoryExists = (dirPath) => {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+};
+
+// POST endpoint to save messages to a file
+app.post('/iscvam/backend/api/save-message', (req, res) => {
+  const { name, email, message } = req.body;
+
+  // Basic validation of the request body
+  if (!name || !email || !message) {
+    return res.status(400).send({ message: 'Name, email, and message are required.' });
+  }
+
+  const newMessage = {
+    name,
+    email,
+    message,
+    date: new Date().toISOString(),
+  };
+
+  // Ensure the directory exists before saving the file
+  ensureDirectoryExists(path.dirname(filePath));
+
+  // Read the existing messages from the file
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err && err.code !== 'ENOENT') {
+      return res.status(500).send({ message: 'Error reading messages', error: err });
+    }
+
+    // If the file doesn't exist or is empty, start with an empty array
+    const messages = data ? JSON.parse(data) : [];
+
+    // Add the new message to the array
+    messages.push(newMessage);
+
+    // Save the updated array back to the file
+    fs.writeFile(filePath, JSON.stringify(messages, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send({ message: 'Error saving message', error: err });
+      }
+
+      res.status(200).send({ message: 'Message saved successfully', newMessage });
+    });
+  });
+});
+
+// GET endpoint to retrieve all messages
+app.get('/iscvam/backend/api/messages', (req, res) => {
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err && err.code !== 'ENOENT') {
+      return res.status(500).send({ message: 'Error reading messages', error: err });
+    }
+
+    const messages = data ? JSON.parse(data) : [];
+    res.status(200).send(messages);
+  });
 });
 
 
 
-app.get('/', (req, res) => res.send('Hello World!'));
-app.listen(   port, host, () => console.log(`Example app listening on port ${port}!`));
+// Route for the root of your app
+app.get('/iscvam/backend', (req, res) => res.send('Hello World!'));
+
+// Route for the backend test path
+app.get('/iscvam/backend', function(req, res) {
+  res.send('Backend is working');
+});
+
+// Start the server on IPv6 and IPv4 (dual-stack)
+app.listen(port, '::', () => {
+  console.log(`Example app listening on all interfaces at port ${port}!`);
+});
+// Example route that should match the NGINX proxy
+app.get('/iscvam/backend/project/GSE189341-acral-sc/all', function(req, res) {
+  res.send('Data for project GSE189341-acral-sc all');
+});
+
+// app.get('/iscvam/', (req, res) => res.send('Hello World!'));
+// app.listen(   port, host, () => console.log(`Example app listening on port ${port}!`));
+// app.get('/iscvam/backend', function(req, res) {
+//   res.send('Backend is working');
+// });
+// app.listen(8002, '0.0.0.0', () => {
+//   console.log('Server is running on port 8002');
+// });
+// Handles any requests that don't match the above routes
+// app.get('/iscvam*', (req, res) => {
+//   console.log('Serving index.html');
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
+
+// app.listen(port, host, () => {
+//   console.log(`Server is running on http://${host}:${port}`);
+// });
