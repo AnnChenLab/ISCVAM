@@ -1,10 +1,12 @@
-# ISCVAM
+# ISCVAM - *I*nteractive *S*ingle *C*ell *V*isual *A*nalytics for *M*ultiomics
 
 ## About
 
 Scripts for **ISCVAM**, a fast, interactive tool for visualizing and investigating *single-cell multi-omics* data
 
-ISCVAM can be accessed at https://chenlab.utah.edu/iscvam
+
+ISCVAM can be accessed at https://chenlab.utah.edu/iscvam/  
+
 
 Contact: ann.chen@hci.utah.edu
 
@@ -56,13 +58,13 @@ Be sure to have the following technologies installed with the required version:
     |- pipeline # r files
 ```
 
-# ISCVAM example datasets
+## ISCVAM example datasets
 
-We applied ISCVAM to investigate cell populations using multiple multiome datasets for proof of principle. The four multiome datasets are: 
+We applied ISCVAM to investigate cell populations using multiple *multiome* datasets for proof of principle. The four multiome datasets are: 
 1) 16,232 cells from the matched pairs of sorted CD8+ Tissue resident memory (TRM) and recirculating (ReCir) T cells from 4 ovarian cancer patients in Anadon, Yu et al. 2022, with GEO: GSE192780
-2) 11,172 cells from a 10x PBMC sample 
-3) 2,635 cells from 10x human healthy brain tissue (3k) 
-4) 22,772 cells from 10x human kidney cancer
+2) 11,172 cells from a PBMC sample from 10X Genomics
+3) 3,233 cells from 10x human healthy brain tissue (3k)
+4) 22,722 cells from 10x human kidney cancer data
 
 In our *manucript*, the two datasets was used as:
 - `Discovery dataset`: which is the paired TRM and ReCir samples from a single patient (patient 100809M) in ovarian cancer paper
@@ -71,6 +73,7 @@ In our *manucript*, the two datasets was used as:
 
 ### Reference datasets
 - Anadon et al. Ovarian cancer immunogenicity is governed by a narrow subset of progenitor tissue-resident memory T cell. Cancer Cell (2022) 
-- PBMC sample: https://www.10xgenomics.com/resources/datasets/pbmc-from-a-healthy-donor-granulocytes-removed-through-cell-sorting-10-k-1-standard-1-0-0 
-- Human healthy brain tissue (3k): https://www.10xgenomics.com/datasets/frozen-human-healthy-brain-tissue-3-k-1-standard-2-0-0 - Human kidney cancer: https://www.10xgenomics.com/datasets/human-kidney-cancer-nuclei-isolated-with-chromium-nuclei-isolation-kit-saltyez-protocol-and-10x-complex-tissue-dp-ct-sorted-and-ct-unsorted-1-standard  
+- 10x multiome PBMC sample: https://www.10xgenomics.com/resources/datasets/pbmc-from-a-healthy-donor-granulocytes-removed-through-cell-sorting-10-k-1-standard-1-0-0 
+- 10x multiome human brain: https://www.10xgenomics.com/datasets/frozen-human-healthy-brain-tissue-3-k-1-standard-2-0-0 
+- 10x multiome human kidney cancer: https://www.10xgenomics.com/datasets/human-kidney-cancer-nuclei-isolated-with-chromium-nuclei-isolation-kit-saltyez-protocol-and-10x-complex-tissue-dp-ct-sorted-and-ct-unsorted-1-standard 
 

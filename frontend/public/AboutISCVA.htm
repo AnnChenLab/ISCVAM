@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISCVA: Interactive Single Cell Visual Analytics</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .container {
+            max-width: 1200px; /* Adjust the width as per your preference */
+            margin: 0 auto; /* This centers the container horizontally */
+            padding: 20px; /* Optional padding inside the container */
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold; /* Ensures the text is bold */
+            font-style: normal; /* Ensures the text is not italic */
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ISCVAM: Interactive Single Cell Visual Analytics for Multiomics</h1>
+        <p><em>ISCVAM: <b>I</b>nteractive <b>S</b>ingle <b>C</b>ell <b>V</b>isual <b>A</b>nalytics for <b>M</b>ultiomics</em>, is a JavaScript-based tool for scRNA-seq data analysis. Originally developed at <a href="https://iscvam.moffitt.org/">https://iscvam.moffitt.org/</a>, ISCVAM has since been enhanced with extended capabilities, including the 190 <a href="http://tisch.comp-genomics.org">TISCH datasets</a>, and is now hosted at <a href="https://chenlab.utah.edu/iscvam/">https://chenlab.utah.edu/iscvam/</a>.</p>
+
+        <p>The computational tool <em>ISCVAM</em> is described in this paper:</p>
+        <p>Smalley J, Chen Z, Phadke M, Li J, Yu X, Wyatt C, Evernden B, Messina JL, Sarnaik AA, Sondak VK, Zhang C, Law V, Tran N, Etame A, Macaulay RJB, Eroglu Z, Forsyth PA, Rodriguez PC, Chen YA, Smalley KSM. <a href="https://pubmed.ncbi.nlm.nih.gov/34035069/">Single-Cell Characterization of the Immune Microenvironment of Melanoma Brain and Leptomeningeal Metastases.</a> Clin Cancer Res. 2021 Jul 15;27(14):4109-4125.</p>
+
+        <h2>Briefly, it consists of two major components:</h2>
+        <ul>
+            <li>The First component includes a collection of Bash and R scripts (utilizing many of the widely used algorithms in the single-cell community, including:
+                <ul>
+                    <li><a href = "https://pubmed.ncbi.nlm.nih.gov/29608179/">Seurat</a> for general processing,</li>
+                    <li><a href = "https://pubmed.ncbi.nlm.nih.gov/30643263/">SingleR</a> for cell-type recognition, and</li>
+                    <li><a href = "https://pubmed.ncbi.nlm.nih.gov/31294801/">Single-cell signature explorer</a> for gene set signature scoring that processed the scRNA-seq data offline</li>
+                </ul>
+            </li>
+            <li>The second is the Web-based component based upon state-of-the-art technologies, including <em>react.js</em> from Facebook, <em>tensorflow.js</em> from Google and <em>Plotly.js</em>, that allows convenient real-time interactive exploration and <em>hpc node.js</em> backend was also created to serve the on-demand queries of the Web application, allowing for real-time interactive investigation of genes expressed in selected samples or subsets of cells. (A note on web-browser: <em>ISCVA</em> is currently available on all web browsers, except for Safari)</li>
+        </ul>
+
+        <h2>ISCVAM was used in these papers:</h2>
+        <ul>
+
+            <li>Phadke MS, Li J, Chen Z, Rodriguez PC, Mandula JK, Karapetyan L, Forsyth PA, Chen YA, Smalley KSM. <a href = "https://pubmed.ncbi.nlm.nih.gov/38056899/">Differential requirements for CD4+ T cells in the efficacy of the anti-PD-1+LAG-3 and anti-PD-1+CTLA-4 combinations in melanoma flank and brain metastasis models.</a> J Immunother Cancer. 2023 PMID: 38056899 PMCID: PMC10711842 DOI: 10.1136/jitc-2023-007239</li>
+            <li>Phadke MS, Chen Z, Li J, Mohamed E, Davies MA, Smalley J, Duckett DR, Palve V, Czerniecki BJ, Forsyth PA, Noyes D, Adeegbe DO, Eroglu Z, Nguyen KT, Tsai KY, Rix U, Burd CE, Chen YA, Rodriguez PC, Smalley KSM. <a href = "https://pubmed.ncbi.nlm.nih.gov/33653716/">Targeted Therapy Given after Anti-PD-1 Leads to Prolonged Responses in Mouse Melanoma Models through Sustained Antitumor Immunity.</a> Cancer Immunol Res. 2021 May;9(5):554-567. doi: 10.1158/2326-6066.CIR-20-0905. Epub 2021 Mar 2. PubMed PMID: 33653716; PubMed Central PMCID: PMC8102376.</li>
+            <li>Smalley J, Chen Z, Phadke M, Li J, Yu X, Wyatt C, Evernden B, Messina JL, Sarnaik AA, Sondak VK, Zhang C, Law V, Tran N, Etame A, Macaulay RJB, Eroglu Z, Forsyth PA, Rodriguez PC, Chen YA, Smalley KSM. <a href = "https://pubmed.ncbi.nlm.nih.gov/34035069/">Single-Cell Characterization of the Immune Microenvironment of Melanoma Brain and Leptomeningeal Metastases.</a> Clin Cancer Res. 2021 Jul 15;27(14):4109-4125. doi: 10.1158/1078-0432.CCR-21-1694. Epub 2021 May 25. PubMed PMID: 34035069; PubMed Central PMCID: PMC8282775.</li>
+            <li>Li J, Smalley J, Chen Z, Wu JY, Phadke MS, Teer JK, Nguyen T, Karreth FA, Koomen JM, Sarnaik AA, Zager JS, Khushalani NI, Tarhini AA, Sondak VK, Rodriguez PC, Messina JL, Chen YA, Smalley KSM. <a href = "https://pubmed.ncbi.nlm.nih.gov/35247927/">Single cell characterization of the cellular landscape of acral melanoma identifies novel targets for immunotherapy.</a> Clin Cancer Res. 2022 Mar 4;. doi: 10.1158/1078-0432.CCR-21-3145. [Epub ahead of print] PubMed PMID: 35247927.</li>
+            <li>
+                Hwang, M., Garcia, S., Wang, L., Xie, J., Tran, C., Lee, H., et al. 
+                <em>A preclinical model of patient-derived cerebrospinal fluid circulating tumor cells for experimental therapeutics in leptomeningeal disease from melanoma.</em> 
+                <strong>Neuro Oncol</strong>. 2022;24(5):775–786. 
+                <a href="https://pubmed.ncbi.nlm.nih.gov/35213727/" target="_blank" rel="noopener">PubMed</a>
+              </li>
+        </ul>
+
+        <div class="Visualization Tool Developers">
+            <p>Visualization Tool Developers: Zhihua Chen, Chloe Tran</p>
+        </div>
+
+        <footer>
+            <p>Chen Lab</p>
+        </footer>
+    </div>
+</body>
+
+</html>

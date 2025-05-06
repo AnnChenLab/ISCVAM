@@ -38,10 +38,19 @@ export default function SearchAndHighlight({classes, brushing, genesets, loadRem
         brushing.setFilter(e)
     } 
 
+    // async function changeColorBy(e) {
+    //     const colorBy = e ? e.value : null;
+    //     if(colorBy && !(colorBy in covs)) {
+    //         let category = e.group === 'geneset' ? 'geneset' : 'feature';
+    //         await loadRemoteData(category, colorBy);
+    //     }
+    //     brushing.setColorBy(colorBy);
+    // }
     async function changeColorBy(e) {
         const colorBy = e ? e.value : null;
         if(colorBy && !(colorBy in covs)) {
-            let category = e.group === 'geneset' ? 'geneset' : 'feature';
+            //let category = e.group === 'geneset' ? 'geneset' : 'feature';
+            const category = e.group;
             await loadRemoteData(category, colorBy);
         }
         brushing.setColorBy(colorBy);
