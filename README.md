@@ -2,11 +2,11 @@
 
 ## About
 
-Scripts for ISCVAM, a tool for exploration of multimodal single cell data.
+Scripts for **ISCVAM**, a fast, interactive tool for visualizing and investigating *single-cell multi-omics* data
 
-ISCVAM can be accessed at http://iscva.moffitt.org/
+ISCVAM can be accessed at https://chenlab.utah.edu/iscvam
 
-Contact: ann.chen@moffitt.org
+Contact: ann.chen@hci.utah.edu
 
 # Development
 
@@ -34,6 +34,7 @@ Be sure to have the following technologies installed with the required version:
             |- discovery_dataset
             |- internal_validation_dataset
             |- external_validation_dataset
+            |- multiome_human_kidney
         |- scRNA_seq
             |- TISCH_iscvamR_h5
     |- orchestration
@@ -57,16 +58,19 @@ Be sure to have the following technologies installed with the required version:
 
 # ISCVAM example datasets
 
-We applied ISCVAM to investigate cell populations using two Multiome datasets for proof of principle. The two multiome datasets are: 
+We applied ISCVAM to investigate cell populations using multiple multiome datasets for proof of principle. The four multiome datasets are: 
 1) 16,232 cells from the matched pairs of sorted CD8+ Tissue resident memory (TRM) and recirculating (ReCir) T cells from 4 ovarian cancer patients in Anadon, Yu et al. 2022, with GEO: GSE192780
-2) 11,172 cells from a PBMC sample from 10X Genomics
+2) 11,172 cells from a 10x PBMC sample 
+3) 2,635 cells from 10x human healthy brain tissue (3k) 
+4) 22,772 cells from 10x human kidney cancer
 
-In our manucript, the two datasets was used as:
-- discovery dataset: which is the paired TRM and ReCir samples from a single patient (patient 100809M) in ovarian cancer paper
-- internal validation dataset: the rest of 3 patients with their paired TRM and ReCir samples for each patient from the ovarian cancer paper
-- external validation dataset: PBMC multiome data
+In our *manucript*, the two datasets was used as:
+- `Discovery dataset`: which is the paired TRM and ReCir samples from a single patient (patient 100809M) in ovarian cancer paper
+- `Internal validation dataset`: the rest of 3 patients with their paired TRM and ReCir samples for each patient from the ovarian cancer paper
+- `External validation dataset`: PBMC multiome data
 
 ### Reference datasets
 - Anadon et al. Ovarian cancer immunogenicity is governed by a narrow subset of progenitor tissue-resident memory T cell. Cancer Cell (2022) 
 - PBMC sample: https://www.10xgenomics.com/resources/datasets/pbmc-from-a-healthy-donor-granulocytes-removed-through-cell-sorting-10-k-1-standard-1-0-0 
+- Human healthy brain tissue (3k): https://www.10xgenomics.com/datasets/frozen-human-healthy-brain-tissue-3-k-1-standard-2-0-0 - Human kidney cancer: https://www.10xgenomics.com/datasets/human-kidney-cancer-nuclei-isolated-with-chromium-nuclei-isolation-kit-saltyez-protocol-and-10x-complex-tissue-dp-ct-sorted-and-ct-unsorted-1-standard  
 
