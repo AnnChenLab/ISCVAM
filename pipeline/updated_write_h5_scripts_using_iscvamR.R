@@ -56,34 +56,34 @@ attach_closest_features_to_atac_markers <- function(seurat, heatmap_artifacts) {
 }
 
 
-assemble_heatmap_artifacts <- function(clus.avg.ALL.layers_h5,
-                                       clus.avg_main.cat_h5,
-                                       clus.avg_sub.cat_h5,
-                                       clus.avg_default.ct_h5,
-                                       clus.avg_wnn_0.6_h5,
-                                       clus.avg_curated.ct_h5) {
-  list(
-    rna = c(
-      clus.avg.ALL.layers_h5$rna,
-      list(
-        main.categories=clus.avg_main.cat_h5,
-        sub.categories=clus.avg_sub.cat_h5,
-        default.ct=clus.avg_default.ct_h5
-      )),
-    atac = clus.avg.ALL.layers_h5$atac,
-    wnn = list(
-      curated.ct_wnn=clus.avg_curated.ct_h5,
-      clusters_wsnn_0.6=clus.avg_wnn_0.6_h5
-    )
-  )
-}
+# assemble_heatmap_artifacts <- function(clus.avg.ALL.layers_h5,
+#                                        clus.avg_main.cat_h5,
+#                                        clus.avg_sub.cat_h5,
+#                                        clus.avg_default.ct_h5,
+#                                        clus.avg_wnn_0.6_h5,
+#                                        clus.avg_curated.ct_h5) {
+#   list(
+#     rna = c(
+#       clus.avg.ALL.layers_h5$rna,
+#       list(
+#         main.categories=clus.avg_main.cat_h5,
+#         sub.categories=clus.avg_sub.cat_h5,
+#         default.ct=clus.avg_default.ct_h5
+#       )),
+#     atac = clus.avg.ALL.layers_h5$atac,
+#     wnn = list(
+#       curated.ct_wnn=clus.avg_curated.ct_h5,
+#       clusters_wsnn_0.6=clus.avg_wnn_0.6_h5
+#     )
+#   )
+# }
 
-heatmap_artifacts = assemble_heatmap_artifacts(clus.avg.ALL.layers_h5,
-                                               clus.avg_main.cat_h5,
-                                               clus.avg_sub.cat_h5,
-                                               clus.avg_default.ct_h5,
-                                               clus.avg_wnn_0.6_h5,
-                                               clus.avg_curated.ct_h5)
+# heatmap_artifacts = assemble_heatmap_artifacts(clus.avg.ALL.layers_h5,
+#                                                clus.avg_main.cat_h5,
+#                                                clus.avg_sub.cat_h5,
+#                                                clus.avg_default.ct_h5,
+#                                                clus.avg_wnn_0.6_h5,
+#                                                clus.avg_curated.ct_h5)
 
 write_mm_h5 <- function(seurat, covs_discrete, heatmap_artifacts, filename) {
   
@@ -106,7 +106,7 @@ write_mm_h5 <- function(seurat, covs_discrete, heatmap_artifacts, filename) {
   # Process each layer and attach heatmap artifacts
   layer_names <- c("rna", "atac", "wnn")
   layers <- lapply(layer_names, function(layer) {
-    layer_artifacts <- iscvamR::layer_artifacts_from_seurat(
+    layer_artifacts <- layer_artifacts_from_seurat(
       seurat, 
       qc_features = qc_features, 
       umap = reductions[[layer]][2],
@@ -121,5 +121,5 @@ write_mm_h5 <- function(seurat, covs_discrete, heatmap_artifacts, filename) {
   names(layers) <- layer_names
   
   # Write to .h5 file
-  iscvamR::write_h5(filename, seurat, layers = layers, assays = c("RNA", "peaks", "GeneActivity"))
+  write_h5(filename, seurat, layers = layers, assays = c("RNA", "peaks", "GeneActivity"))
 }

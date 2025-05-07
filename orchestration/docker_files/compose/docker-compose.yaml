@@ -1,8 +1,8 @@
-version: "3"
+version: "4"
 
 services:
   iscva-backend:
-    image: "florant/iscvam-backend"
+    image: "florant/iscvam-backend-plotfeatures"
     ports:
       - "8001:8001"
     volumes:

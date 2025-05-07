@@ -29,8 +29,6 @@ seurat.peaks <- create_peaks_assay(peaks.calling, seurat.raw)
 save(seurat.peaks, file = "seurat.peaks.RData")
 
 
-
-
 dimension.before.qc <- retrieve_dimension(seurat.peaks)
 print(dimension.before.qc)
 
@@ -129,9 +127,9 @@ heatmap_artifacts <- assemble_heatmap_artifacts(clus.avg.for.sct.clusterings,
 
 save(heatmap_artifacts, file = file.path(path.result,"heatmap_artifacts.RData"))
 
-
 ############
-#add gene names to counts matrix
+#add gene names to count.matrix in seurat object (in case the current version doesnt have it)
+
 path.10x <- paste0(data.path, "/", list.files(data.path, pattern = ".*.h5"))
 counts = Read10X_h5(path.10x)
 seurat.wnn.clusterings@assays[["RNA"]]@layers[["counts"]]@Dimnames[[1]] <- counts[["Gene Expression"]]@Dimnames[[1]]
@@ -140,10 +138,10 @@ seurat.wnn.clusterings@assays[["RNA"]]@layers[["counts"]]@Dimnames[[2]] <- count
 save(seurat.wnn.clusterings, file = file.path(path.result,"seurat.wnn.clusterings.RData"))
 
 
+
 #############
 #writing iscvam h5-compliant
 write_mm_h5(seurat.wnn.clusterings, covs, heatmap_artifacts, filename) 
-##########
 
 
 

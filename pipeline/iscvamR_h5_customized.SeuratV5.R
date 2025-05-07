@@ -1,3 +1,5 @@
+# THIS SCRIPT CUSTOMIZED FOR SEURAT V5 (meaning add @layer[['count']])
+
 #' Generate ISCVAM compliant h5 files.
 #' 
 #' @description
@@ -23,16 +25,28 @@ write_h5 <- function(fn, seurat, layers, assays = c("RNA", "peaks", "GeneActivit
 
   for (assay in assays) {
     if (assay %in% names(seurat@assays)) {
-      write_h5_extra_assay(fn, seurat@assays[[assay]]@counts, assay)
+     if (assay == "RNA"){
+       #SeuratV5
+       counts.matrix <- seurat@assays[[assay]]@layers[['counts']]
+       colnames(counts.matrix) <- colnames(seurat)
+      write_h5_extra_assay(fn, counts.matrix, assay)
+     } 
+      if ((assay == "peaks") | (assay == "GeneActivity")){
+       write_h5_extra_assay(fn, seurat@assays[[assay]]@counts, assay)
+     } 
     }
   }
 
   rhdf5::h5createGroup(fn,"artifacts")
 
   for (artifact_name in names(layers)) {
+    #layers <- c("all", "lymphoids", "myloids", "others")
+    #or in multiome: layer <- c("rna", "atac", "wnn")
+    #to create this list of layers, use function "layer_artifacts_from_seurat" below (output = covs)
     write_h5_artifact(fn, artifact_name, layers[[artifact_name]])
 
-    if ("clusterings" %in% names(layers[[artifact_name]])) {
+    if (("clusterings" %in% names(layers[[artifact_name]])) & (length(layers[[artifact_name]][["clusterings"]]) >=1)) {
+      #to create this list of clusterings, use function "heatmap_artifacts_from_Seurat" below(output=markers, all_markers_lognorm, etc.)
       write_h5_clusterings(fn, artifact_name, layers[[artifact_name]][["clusterings"]])
     }
   }

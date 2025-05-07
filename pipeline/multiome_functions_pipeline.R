@@ -10,6 +10,8 @@ library(future)
 
 
 set.seed(1234)
+resolution.lst <- c(0.05, 0.08, 0.6,0.8)
+#c(0.05, 0.08, 0.6,0.8, 1, 1.2, 2, 4)
 
 create_seurat_multiome <- function(data.path, meta.data=FALSE){
   #this Seurat is without meta.data
@@ -36,6 +38,9 @@ create_seurat_multiome <- function(data.path, meta.data=FALSE){
     counts = counts$`Gene Expression`,
     assay = "RNA"
   )
+  seurat@assays[["RNA"]]@layers[["counts"]]@Dimnames[[1]] <- counts[["Gene Expression"]]@Dimnames[[1]]
+  seurat@assays[["RNA"]]@layers[["counts"]]@Dimnames[[2]] <- counts[["Gene Expression"]]@Dimnames[[2]]
+  
   
   # create ATAC assay and add it to the object
   seurat[["ATAC"]] <- CreateChromatinAssay(
@@ -68,6 +73,11 @@ create.seurat.raw.batch <- function(sample.table, meta.data=meta.data){
 ################################
 # PEAK CALLING
 
+call.peaks_from_signac<- function(seurat.raw, data.path){
+  DefaultAssay(seurat.raw) <- "ATAC"
+  seurat.raw <- CallPeaks(seurat.raw, outdir = data.path)
+  return(seurat.raw)
+}
 
 create_peaks_assay <- function(peaks, seurat){
   library(GenomicRanges)
@@ -80,7 +90,7 @@ create_peaks_assay <- function(peaks, seurat){
   peaks <- keepStandardChromosomes(peaks, pruning.mode = "coarse")
   peaks <- subsetByOverlaps(x = peaks, ranges = blacklist_hg38_unified, invert = TRUE)
   
-  library(future)
+  require(future)
   plan("multisession", workers = 10)
   # quantify counts in each peak
   macs2_counts <- FeatureMatrix(
@@ -92,7 +102,7 @@ create_peaks_assay <- function(peaks, seurat){
   seurat[["peaks"]] <- CreateChromatinAssay(
     counts = macs2_counts,
     #fragments = paste0(data.path,'/', fragpath[1])
-    fragments = Fragments(seurat)
+    fragments = Fragments(seurat),
     annotation = Annotation(seurat)
   )
   return(seurat)
@@ -165,16 +175,18 @@ create.union.seurat <- function(seurat_raw_batch_peaks){
 }
 
 ###########
-do.singler <- function(raw.reads, single.ref.rds) {
+do.singler <- function(seurat.raw, refs) {
   require(SingleR)
   require(future)
-  load(single.ref.rds)
+  DefaultAssay(seurat.raw) <- "RNA"
+  raw.reads <- GetAssayData(seurat.raw)
   options(future.globals.maxSize = 800000 * 1024^2)
   preds <- sapply(names(refs), function(ref) {
     sapply(c("main","fine"), function(r) {
       SingleR(raw.reads, refs[[ref]], refs[[ref]][[paste0("label.",r)]] ) }
     )
   })
+  return(preds)
 }
 
 
@@ -182,6 +194,7 @@ do.singler <- function(raw.reads, single.ref.rds) {
 #############
 #QC in ATAC
 qc_ATAC <- function(seurat, meta.data =TRUE){
+  #meta.data means "atac_peak_region_fragments"
   options(future.globals.maxSize = 800000 * 1024^2)
   DefaultAssay(seurat) <- "ATAC"
   
@@ -230,8 +243,8 @@ qc_RNA <- function(seurat, species) {
   )
   seurat[["percent.mt"]] <- PercentageFeatureSet(seurat, pattern = mt.pattern)
   seurat[["percent.rp"]] <- PercentageFeatureSet(seurat, pattern = ribo.pattern)
-  seurat[,seurat[["percent.mt"]] <= 20 & seurat[["nFeature_RNA"]] >= 500]
-  
+  seurat <- seurat[,seurat[["percent.mt"]] <= 20 & seurat[["nFeature_RNA"]] >= 500]
+  return(seurat)
 }
 
 ####################
@@ -307,9 +320,10 @@ analyze_rna <- function(seurat,  pcs.to.compute=200, pcs.to.analyze=40, debatch=
 }
 
 
-do.clusterings <- function(seurat, assay) {
+do.clusterings <- function(seurat, assay, resolution.lst) {
   DefaultAssay(seurat) <- assay
-  for(resolution in c(0.6,0.8, 1, 1.2, 2, 4)) {
+ 
+ for(resolution in resolution.lst){
     seurat <- FindClusters(seurat, resolution = resolution)
     seurat[[paste0("clusters_",assay, "_",resolution)]] = seurat$seurat_clusters
   }
@@ -317,11 +331,11 @@ do.clusterings <- function(seurat, assay) {
 }
 
 
-do.clusterings.WNN <- function(seurat) {
+do.clusterings.WNN <- function(seurat, resolution.lst) {
   #no need to specify assay since WNN is already combining rna and atac
   #DefaultAssay(seurat) <- assay
   
-  for(resolution in c(0.6,0.8, 1, 1.2, 2, 4)) {
+    for(resolution in resolution.lst ) {
     seurat <- FindClusters(seurat, graph.name = "wsnn", algorithm = 3, verbose = FALSE, 
                  resolution=resolution)
     seurat[[paste0("clusters_wsnn_",resolution)]] = seurat$seurat_clusters
@@ -391,7 +405,8 @@ build_WNN <- function(seurat.analyzed.atac, debatch.atac=FALSE){
   object = seurat.analyzed.atac,
   reduction.list = reduction.list, 
   dims.list = list(1:50, 2:40),
-  modality.weight.name = "RNA.weight",
+  #modality.weight.name = "RNA.weight",
+  modality.weight.name = c("SCT.weight", "peaks.weight"),
   verbose = TRUE)
 
   # # build a joint UMAP visualization
@@ -453,15 +468,18 @@ TF_analysis <- function(RWPE.combined.analyzed){
 ###############
 find.markers.by.clustering <- function(seurat, clusters, assay) {
   #REF: https://github.com/satijalab/seurat/issues/1717 
+  #https://github.com/satijalab/seurat/issues/1501
+  #https://github.com/hbctraining/scRNA-seq_online/issues/14
   if ((assay=="SCT") || (assay =="integrated")){
     #when doing clustering, clustering based on SCT, which store < 36k genes 
-    #but when finding marker genes, must use RNA assay which store 36k genes
+    #but when finding marker genes, maybe should use RNA assay which store 36k genes?
+    #but RNA assay doesnt have normalized counts like SCT
     
     #INPUT assay here is "SCT" because using SCT for clustering, thus clustering column name included "SCT" word
-    assay <- "RNA"
-    DefaultAssay(seurat) <- "RNA"
+    assay <- "SCT"
+    DefaultAssay(seurat) <- "SCT"
   }else{
-    DefaultAssay(seurat) <- assay
+    DefaultAssay(seurat) <- assay #in case of "peaks"
   }
   
   Idents(seurat) <- clusters
@@ -477,40 +495,69 @@ find.markers.by.clustering <- function(seurat, clusters, assay) {
   return(markers)
 }
 
+find.markers.for.two.assays <- function(seurat.wnn.clusterings, clustering, resolution.lst){
+  rna.markers <- find.markers.by.clustering(seurat.wnn.clusterings, clustering, assay="SCT")
+  peaks.markers <- find.markers.by.clustering(seurat.wnn.clusterings, clustering, assay="peaks")
+  return(list(rna = rna.markers, 
+              atac = peaks.markers))
+}
 
-find.markers.by.all.clustering <- function(seurat, group=1, assay) {
+find.markers.by.all.clusterings.for.two.assays <- function(seurat, group=0, assay, resolution.lst) {
+  
+  mid.point <- length(resolution.lst)/2
   if (group ==1){
-    clusterings <- c(paste0("clusters_", assay, "_0.6"), 
-                     paste0("clusters_", assay, "_0.8"),
-                     paste0("clusters_", assay, "_1") 
-                     )
+    #first half of resolution list
+    clusterings <- sapply(resolution.lst[1:mid.point], function(res){
+              paste0("clusters_", assay, "_",res)
+    })
   }
   if (group ==2){
-    clusterings <- c(paste0("clusters_", assay, "_1.2"),
-                      paste0("clusters_", assay, "_2"),
-                     paste0("clusters_", assay, "_4"))
+    #second half of resolution list
+    clusterings <- sapply(resolution.lst[(mid.point+1):length(resolution.lst)], function(res){
+          paste0("clusters_", assay, "_",res)
+})
   }
   if (group ==0){
-    clusterings <- c(paste0("clusters_", assay, "_0.6"),
-                    paste0("clusters_", assay, "_0.8"),
-                    paste0("clusters_", assay, "_1"),
-                    paste0("clusters_", assay, "_1.2"), 
-                    paste0("clusters_", assay, "_2"), 
-                    paste0("clusters_", assay, "_4"))
+    clusterings <- sapply(resolution.lst, function(res){
+          paste0("clusters_", assay, "_",res)
+      })
+   
   }
-  if(group=="wnn"){
+  if(assay=="wnn"){
     clusterings <- grep("clusters_wsnn_.*", colnames(seurat@meta.data), value = TRUE)
   }
 
   ret <- lapply(clusterings, function(clustering) {
     print(paste0('start with ', clustering))
-    find.markers.by.clustering(seurat,  seurat[[clustering]], assay)
+   # find.markers.by.clustering(seurat,clustering, assay)
+    
+    find.markers.for.two.assays(seurat, clustering)
     
   })
   names(ret) <- clusterings
   ret
 }
 
+formating_markers_clusterings <- function(markers_sct_clusterings) {
+  ### in marker df, convert cluster column from factor to character
+  #so when writing h5 file, these cluster names will be conserved (instead of being converted to integer by h5)
+  markers_sct_clusterings_test <- lapply(names(markers_sct_clusterings), function(clustering){
+    
+    clustering_ret <- lapply(names(markers_sct_clusterings[[clustering]]), function(modality){
+      print(clustering)
+      print(modality)
+      markers_df <- markers_sct_clusterings[[clustering]][[modality]]
+      markers_df$cluster <- as.character(markers_df$cluster)
+      markers_sct_clusterings[[clustering]][[modality]] <- markers_df
+      return(markers_sct_clusterings[[clustering]][[modality]])
+    })
+    names(clustering_ret) <-  c("rna", "atac")
+    return(clustering_ret)
+    
+  })
+  names(markers_sct_clusterings_test) <- names(markers_sct_clusterings)
+  return(markers_sct_clusterings_test)
+}
 
 
 ##############################
@@ -532,7 +579,166 @@ write_all.markers <- function(fileName, all.markers){
   saveWorkbook(wb, file = fileName, overwrite = TRUE)
 }
 
+#######################
+
+###############################
+do.curated.cell.types <- function(cell.and.cluster.stats) {
+  
+  clustering <- names(cell.and.cluster.stats)[1]
+  cell.stats <- cell.and.cluster.stats[[clustering]]$cell.stats
+  cluster.stats <- cell.and.cluster.stats[[clustering]]$cluster.stats
+  
+  major.cluster.cell.types <- cluster.stats$ct.main
+  names(major.cluster.cell.types) <- cluster.stats$clusterN
+  majority.exception.clusters = c()
+  cluster <- cell.stats[[clustering]]
+  curated.cell.types <- case_when(
+    (! (cluster %in% majority.exception.clusters)) ~
+      paste0(as.character(major.cluster.cell.types[as.character(cluster)]), "-", cluster),
+    TRUE ~ "UNKNOWN"
+  )
+  curated.cell.types
+}
+
+#############################
+#read results of singleR 
+
+subset.preds <- function (preds, cells)  {
+  #this function was used to create an EMPTY df to store singleR result'''
+  levels <- rownames(preds)
+  names <- colnames(preds)
+  ret <- array(list(), c(length(levels), length(names)))
+  rownames(ret) = levels
+  colnames(ret) = names
+  for(refn in names) {
+    for(refl in levels) {
+      ret[[refl, refn]] = preds[[refl,refn]][cells,]
+    }
+  }
+  ret
+}
+
+preds.to.labels <- function(preds) {
+  
+  #this function is to pass the result of singleR to empty df
+  
+  ref.levels <- c("main", "fine")
+  ref.names <- colnames(preds)
+  ret <- list()
+  for(refn in ref.names) {
+    for(refl in ref.levels) {
+      ret[[paste0(refn,".", refl)]] = preds[[refl,refn]]$pruned.labels
+    }
+  }
+  ret
+}
+
+get.covs <- function(seurat, preds, species, default.ct) {
+  ref.by.species=list(Mouse=c("immgen", "mousernaseq"), Human=c("blueprint","hpca", "dice", "monaco","novershtern"))
+  #this function is to get 10 cols of cell type prediction from singleR
+  preds.labels <- preds.to.labels(subset.preds(preds,colnames(seurat))[,ref.by.species[[species]]])
+
+  preds.labels <- data.frame(preds.labels)
+  covs <- cbind(default.ct = default.ct, preds.labels)
+  return(covs)
+}
+
+
+################
+
+get.cell.and.cluster.stats.for.clustering <- function(seurat, preds, clustering="clusters_SCT_0.6") {
+  #this function only use blueprint.main col 
+  ct.main <- subset.preds(preds,colnames(seurat))[["main", "blueprint"]]$pruned.labels
+  
+  ncell.by.ct.main <- table(ct.main)
+  ncell.by.ct.main <- sort(ncell.by.ct.main, decreasing = T)
+  top.cts <- names(ncell.by.ct.main[ncell.by.ct.main>0])
+  cell.stats <- cbind(seurat@meta.data, ct.main)
+  
+  cell.stats$clusterN = unlist(seurat[[clustering]])
+  cell.stats$ct.main = factor(ct.main, levels=top.cts)
+  
+  cluster.stats <- cell.stats %>% 
+    group_by(clusterN, ct.main) %>%
+    summarize(n = n(), nFeature_RNA=median(nFeature_RNA), nCount_RNA=median(nCount_RNA),
+              percent.mt = median(percent.mt)) %>%
+    group_by(clusterN) %>%
+    mutate(freq=round(n/sum(n), digits = 2))
+  
+  majority.stats <- cluster.stats %>% group_by(clusterN) %>% filter(freq==max(freq))
+  list(cell.stats=cell.stats, cluster.stats=majority.stats)
+}
+
+get.cell.and.cluster.stats.for.all.clusterings <- function(seurat, preds) {
+   clusterings <- colnames(seurat@meta.data)[grep("clusters_.*", colnames(seurat@meta.data))]
+
+  res <- lapply(clusterings, function(clustering) {
+    get.cell.and.cluster.stats.for.clustering(seurat, preds,clustering)
+  })
+  names(res) <- clusterings
+  return(res)
+  
+}
+
+write_cells.clusters.stats <- function(fileName, cell.and.cluster.stats, seurat){
+  require(openxlsx)
+  excel <- createWorkbook(fileName)
+  
+  clusterings <- colnames(seurat@meta.data)[grep("clusters_.*", colnames(seurat@meta.data))]
+  
+  sapply(clusterings, function(clustering) {
+    cell.stats <- cell.and.cluster.stats[[clustering]][['cell.stats']]
+
+    cluster.stats <- cell.and.cluster.stats[[clustering]][["cluster.stats"]]
+    cluster_name <- gsub('clusters', '', clustering)
+    
+    # Add worksheets to workbook
+    addWorksheet(excel, sheetName = paste0(cluster_name, '_cell.stats'))
+    writeData(excel, sheet = paste0(cluster_name, '_cell.stats'), cell.stats, colNames = TRUE)
+    
+    addWorksheet(excel, sheetName = paste0(cluster_name, '_cluster.stats'))
+    writeData(excel, sheet = paste0(cluster_name, '_cluster.stats'), cluster.stats, colNames=TRUE)
+  })
+  
+  saveWorkbook(excel, file = fileName, overwrite = TRUE)
+}
+
+
+########################
+#this is default.ct for rna version i.e. finding rna markers for default.ct
+annotate.curated.cell.types <- function(curated.cell.types, markers) {
+  cts = unique(curated.cell.types)
+  #extract last hyphen and cluster numbers of cts
+  library(dplyr)
+  library(stringr)
+  clus_numb <- str_extract(cts, "-[0-9]+$")
+  clus_numb <- gsub("-", "", clus_numb)
+  
+  ct <- as.character(strsplit(cts, "-[0-9]+$"))
+  
+  df <- data.frame(cts, clus_numb, ct) 
+  df$clus_numb <- as.numeric(df$clus_numb)
+  #reorder cts
+  df <- df %>% arrange(clus_numb)
+  cts.order <- df$cts
+  
+  markers$cluster <- factor(markers$cluster, levels = cts.order)
+  markers <- markers %>% arrange(cluster)
+  
+  return(list(curated.cell.types=curated.cell.types, markers=markers))
+}
+
+
 ###################
+default.cts_find.markers.and.add.to.markers.sct.clusterings <- function(seurat.wnn.clusterings, default.cts, markers_sct_clusterings){
+  seurat.wnn.clusterings$default.cts <- default.cts
+  markers_default.cts_2assays <- find.markers.for.two.assays(seurat.wnn.clusterings, "default.cts")
+  save(markers_default.cts_2assays, file = "markers_default.cts_2assays.RData")
+  
+  markers_sct_clusterings$default.cts <- markers_default.cts_2assays
+  return(markers_sct_clusterings)
+}
+##############
 
 plot.heatmap.seurat <- function(seurat, markers, fileName, assay, marker.set.name) {
   library(Seurat)
@@ -546,13 +752,9 @@ plot.heatmap.seurat <- function(seurat, markers, fileName, assay, marker.set.nam
   seurat <- NormalizeData(seurat, assay = "peaks")
   seurat <- ScaleData(seurat)
   
-  
   DefaultAssay(seurat) <- assay
   cluster.averages <- AverageExpression(seurat, return.seurat = TRUE)
   
-  DefaultAssay(cluster.averages) <- assay
-  cluster.averages <- NormalizeData(cluster.averages, assay = assay)
-  cluster.averages <- ScaleData(cluster.averages)
   
   require(ggplot2)
   require(dplyr)
@@ -617,222 +819,241 @@ plot.heatmap_ALL <- function(marker.sets, seurat, assay){
   
 }
 
-#######################
-
-###############################
-do.curated.cell.types <- function(cell.and.cluster.stats, clustering) {
-  #cell.stats <- cell.and.cluster.stats[["cell.stats", clustering]]
-  #cluster.stats <- cell.and.cluster.stats[["cluster.stats", clustering]]
-  
-  cell.stats <- cell.and.cluster.stats[[clustering]]$cell.stats
-  cluster.stats <- cell.and.cluster.stats[[clustering]]$cluster.stats
-  
-  major.cluster.cell.types <- cluster.stats$ct.main
-  names(major.cluster.cell.types) <- cluster.stats$clusterN
-  majority.exception.clusters = c()
-  cluster <- cell.stats[[clustering]]
-  curated.cell.types <- case_when(
-    (! (cluster %in% majority.exception.clusters)) ~
-      paste0(as.character(major.cluster.cell.types[as.character(cluster)]), "-", cluster),
-    TRUE ~ "UNKNOWN"
-  )
-  curated.cell.types
-}
-
-#############################
-#read results of singleR 
-
-subset.preds <- function (preds, cells)  {
-  #this function was used to create an EMPTY df to store singleR result'''
-  levels <- rownames(preds)
-  names <- colnames(preds)
-  ret <- array(list(), c(length(levels), length(names)))
-  rownames(ret) = levels
-  colnames(ret) = names
-  for(refn in names) {
-    for(refl in levels) {
-      ret[[refl, refn]] = preds[[refl,refn]][cells,]
-    }
-  }
-  ret
-}
-
-preds.to.labels <- function(preds) {
-  
-  #this function is to pass the result of singleR to empty df
-  
-  ref.levels <- c("main", "fine")
-  ref.names <- colnames(preds)
-  ret <- list()
-  for(refn in ref.names) {
-    for(refl in ref.levels) {
-      ret[[paste0(refn,".", refl)]] = preds[[refl,refn]]$pruned.labels
-    }
-  }
-  ret
-}
-
-get.covs <- function(seurat, preds, species, default.ct) {
-  ref.by.species=list(Mouse=c("immgen", "mousernaseq"), Human=c("blueprint","hpca", "dice", "monaco","novershtern"))
-  #this function is to get 10 cols of cell type prediction from singleR
-  preds.labels <- preds.to.labels(subset.preds(preds,colnames(seurat))[,ref.by.species[[species]]])
-
-  preds.labels <- data.frame(preds.labels)
-  covs <- cbind(default.ct = default.ct, preds.labels)
-  return(covs)
-}
-
-
-################
-
-
-get.cell.and.cluster.stats.for.clustering <- function(seurat, preds, clustering="clusters_SCT_0.6") {
-  #this function only use blueprint.main col 
-  ct.main <- subset.preds(preds,colnames(seurat))[["main", "blueprint"]]$pruned.labels
-  
-  ncell.by.ct.main <- table(ct.main)
-  ncell.by.ct.main <- sort(ncell.by.ct.main, decreasing = T)
-  top.cts <- names(ncell.by.ct.main[ncell.by.ct.main>0])
-  cell.stats <- cbind(seurat@meta.data, ct.main)
-  
-  cell.stats$clusterN = unlist(seurat[[clustering]])
-  cell.stats$ct.main = factor(ct.main, levels=top.cts)
-  
-  cluster.stats <- cell.stats %>% 
-    group_by(clusterN, ct.main) %>%
-    summarize(n = n(), nFeature_RNA=median(nFeature_RNA), nCount_RNA=median(nCount_RNA),
-              percent.mt = median(percent.mt)) %>%
-    group_by(clusterN) %>%
-    mutate(freq=round(n/sum(n), digits = 2))
-  
-  majority.stats <- cluster.stats %>% group_by(clusterN) %>% filter(freq==max(freq))
-  list(cell.stats=cell.stats, cluster.stats=majority.stats)
-}
-
-get.cell.and.cluster.stats.for.all.clusterings <- function(seurat, preds) {
-  # clusterings <- c("seurat_clusters_0.6",
-  #                  "seurat_clusters_0.8", 
-  #                  "seurat_clusters_1", 
-  #                  "seurat_clusters_1.2",
-  #                  "seurat_clusters_2",
-  #                  "seurat_clusters_4")
-  # "clusters_infomap")
-  
-  clusterings <- colnames(seurat@meta.data)[grep("clusters_.*", colnames(seurat@meta.data))]
-
-  res <- lapply(clusterings, function(clustering) {
-    get.cell.and.cluster.stats.for.clustering(seurat, preds,clustering)
-  })
-  names(res) <- clusterings
-  return(res)
-  
-}
-
-write_cells.clusters.stats <- function(fileName, cell.and.cluster.stats, seurat){
-  require(openxlsx)
-  excel <- createWorkbook(fileName)
-  
-  clusterings <- colnames(seurat@meta.data)[grep("clusters_.*", colnames(seurat@meta.data))]
-  
-  
-  sapply(clusterings, function(clustering) {
-    cell.stats <- cell.and.cluster.stats[[clustering]][['cell.stats']]
-
-    cluster.stats <- cell.and.cluster.stats[[clustering]][["cluster.stats"]]
-    cluster_name <- gsub('clusters', '', clustering)
-    
-    # Add worksheets to workbook
-    addWorksheet(excel, sheetName = paste0(cluster_name, '_cell.stats'))
-    writeData(excel, sheet = paste0(cluster_name, '_cell.stats'), cell.stats, colNames = TRUE)
-    
-    addWorksheet(excel, sheetName = paste0(cluster_name, '_cluster.stats'))
-    writeData(excel, sheet = paste0(cluster_name, '_cluster.stats'), cluster.stats, colNames=TRUE)
-  })
-  
-  saveWorkbook(excel, file = fileName, overwrite = TRUE)
-}
-
-
-########################
-#this is default.ct for rna version i.e. finding rna markers for default.ct
-annotate.curated.cell.types <- function(curated.cell.types, markers) {
-  cts = unique(curated.cell.types)
-  #extract last hyphen and cluster numbers of cts
-  library(dplyr)
-  library(stringr)
-  clus_numb <- str_extract(cts, "-[0-9]+$")
-  clus_numb <- gsub("-", "", clus_numb)
-  
-  ct <- as.character(strsplit(cts, "-[0-9]+$"))
-  
-  df <- data.frame(cts, clus_numb, ct) 
-  df$clus_numb <- as.numeric(df$clus_numb)
-  #reorder cts
-  df <- df %>% arrange(clus_numb)
-  cts.order <- df$cts
-  
-  markers$cluster <- factor(markers$cluster, levels = cts.order)
-  markers <- markers %>% arrange(cluster)
-  
-  return(list(curated.cell.types=curated.cell.types, markers=markers))
-}
-
-###############
-#plot heatmap RNA for default.ct
-
-
-
-plot.heatmap.default.ct_rna <- function(annotation.default.cell.types, seurat.wnn.clusterings){
-  ###plot heatmap for rna markers for default.ct
-  
-  DefaultAssay(seurat.wnn.clusterings) <- "RNA"
-  
-  order.ct <- names(table(annotation.default.cell.types$markers$cluster))
-  
-  Idents(seurat.wnn.clusterings) <- seurat.wnn.clusterings$default.ct
-  levels(seurat.wnn.clusterings) <- order.ct
-  
-  
-  clus.avg_default.ct_rna <- plot.heatmap.seurat(seurat.wnn.clusterings, 
-                                                 annotation.default.cell.types$markers, 
-                                                 "heatmap_default.ct_RNA.markers.pdf", 
-                                                 "RNA", "default.ct_RNA")
-  return(clus.avg_default.ct_rna)
-}
-
-
 ######################
-#default.ct for peak version i.e. finding peak markers for default.ct + export clus.avg 
-default.ct_find.peak.markers.and.plot.heatmap <- function(seurat.wnn.clusterings, default.ct,
-                                                          annotation.default.cell.types){
-  #find peak markers for default.ct
-  seurat.wnn.clusterings$default.ct <- default.ct
+
+heatmap_artifacts_from_seurat_V5 <- function(seurat, clustering, markers, assay, min_lfg=0.0,
+                                             max_p_adj = 0.05, limit=10, mask_mt_rp=TRUE) {
+  Seurat::DefaultAssay(seurat) <- assay
+  if(is.null(seurat[[assay]]@data)) {
+    seurat <- Seurat::NormalizeData(seurat)
+  }
+  if(is.null(seurat[[assay]]@scale.data)) {
+    seurat <- Seurat::ScaleData(seurat)
+  }
+  Seurat::Idents(seurat) <- clustering
   
-  order.ct <- names(table(annotation.default.cell.types$markers$cluster))
-  Idents(seurat.wnn.clusterings) <- seurat.wnn.clusterings$default.ct
-  levels(seurat.wnn.clusterings) <- order.ct
-  
-  
-  DefaultAssay(seurat.wnn.clusterings) <- "peaks"
-  default.ct_peaks_markers <- find.markers.by.clustering(seurat.wnn.clusterings, "default.ct", assay="peaks")
-  
-  #reorder marker list w correct cluster order
-  default.ct_peaks_markers_order <- default.ct_peaks_markers %>%  
-    mutate(cluster = factor(default.ct_peaks_markers$cluster, 
-                            levels =  order.ct)) %>% arrange(cluster)
+  cluster_averages <- Seurat::AverageExpression(seurat, return.seurat = TRUE, assays = assay)
   
   
-  #plot heatmap for default.ct for peak assay
-  clus.avg_default.ct_peaks <- plot.heatmap.seurat(seurat.wnn.clusterings,  
-                                                   markers =default.ct_peaks_markers_order, 
-                                                   fileName = "heatmap_default.ct_peak.markers.pdf", 
-                                                   assay = "peaks", 
-                                                   marker.set.name = "default.ct_peaks")
+  markers_use <- markers %>% dplyr::filter(
+    .data$avg_log2FC > min_lfg &
+      .data$p_val_adj < max_p_adj &
+      !(mask_mt_rp & (grepl("^(RP[SL][0-9])|(Rp[sl][0-9])", .data$gene) |
+                        grepl("^(MT-)|(mt-)", .data$gene)))
+  ) %>%
+    dplyr::group_by(.data$cluster) %>%
+    dplyr::top_n(limit, -.data$p_val_adj) %>%
+    dplyr::top_n(limit, abs(.data$pct.1-.data$pct.2)) %>%
+    dplyr::arrange(.data$cluster)
   
-  return(list(clus.avg = clus.avg_default.ct_peaks, 
-              markers =default.ct_peaks_markers_order ))
+  markers_use <- unique(as.character(markers_use$gene))
+  
+  extract_data_frame <- function(data_source, features, cluster_averages) {
+    library(tibble)
+    colnames(data_source) <- Idents(cluster_averages)
+    data_source <- as.data.frame(data_source)
+    data_source <- cbind(feature.name = features, data_source)
+    rownames(data_source) <- data_source$feature.name
+    return(data_source)
+  }
+  
+  all_markers_lognorm <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@layers[['data']], rownames(cluster_averages), cluster_averages)
+  all_markers_scaled <- extract_data_frame(cluster_averages[[cluster_averages@active.assay]]@layers[['scale.data']], rownames(cluster_averages), cluster_averages)
+  heatmap_markers_lognorm <- all_markers_lognorm[match(markers_use, all_markers_lognorm$feature.name), ]
+  heatmap_markers_scaled <- all_markers_scaled[match(markers_use, all_markers_scaled$feature.name),]
+  
+  list(
+    markers = markers %>% dplyr::mutate(cluster = as.character(.data$cluster)),
+    all_markers_lognorm = all_markers_lognorm,
+    all_markers_scaled = all_markers_scaled,
+    heatmap_markers_lognorm = heatmap_markers_lognorm,
+    heatmap_markers_scaled = heatmap_markers_scaled
+  )
 }
 
+
+
+create.heatmap.artifacts.for.clustering.in.two.modalities <- function(seurat.wnn.clusterings, markers_sct_clusterings, clustering){
+  #for each clustering, create cluster_average in 2 modalities (rna and atac)
+  artifacts_markers_sct_0.6_rna <- heatmap_artifacts_from_seurat_V5(seurat=seurat.wnn.clusterings, 
+                                                                    clustering = clustering, 
+                                                                    markers = markers_sct_clusterings[[clustering]]$rna, 
+                                                                    assay="SCT")
+  artifacts_markers_sct_0.6_peaks <- heatmap_artifacts_from_seurat_V5(seurat=seurat.wnn.clusterings, 
+                                                                      clustering = clustering, 
+                                                                      markers = markers_sct_clusterings[[clustering]]$atac, 
+                                                                      assay="peaks")
+  return(list(rna = artifacts_markers_sct_0.6_rna, 
+              atac = artifacts_markers_sct_0.6_peaks))
+}
+
+
+create.artifacts.ALL.clusterings <- function(seurat, all.markers){
+  ##create artifacts for ALL clusterings
+  clusterings_artifacts <- lapply(names(all.markers), function(clustering){
+    print(clustering)
+    #check if Idents has more than 1 level
+    if (length(names(table(seurat[[clustering]]))) >= 2){
+      artifacts <- create.heatmap.artifacts.for.clustering.in.two.modalities(seurat = seurat, 
+                                                                             markers = all.markers, 
+                                                                             clustering = clustering)
+    }
+  })
+  names(clusterings_artifacts) <- names(all.markers)
+  #remove empty list
+  clusterings_artifacts <- clusterings_artifacts[unlist(lapply(clusterings_artifacts, length) != 0)]
+  return(clusterings_artifacts)
+}
+
+###########
+assemble_heatmap_artifacts <- function(clus.avg.for.sct.clusterings, 
+                                       clus.avg.for.peaks.clusterings, 
+                                       clus.avg.for.wnn.clusterings){
+  
+  return(list(rna =clus.avg.for.sct.clusterings,
+              atac = clus.avg.for.peaks.clusterings,
+              wnn = clus.avg.for.wnn.clusterings))
+}
+############
+
+##################
+layer_artifacts_from_seurat <- function(seurat, qc_features, umap = "umap", tsne = "tsne",
+                                        clustering_names, extra_discrete_covs = extra_discrete_covs,
+                                        extra_continuous_covs = NULL) {
+  
+  # Extract UMAP coordinates and set column names
+  umap_cords <- seurat@reductions[[umap]]@cell.embeddings
+  colnames(umap_cords) <- c("umap_1", "umap_2")
+  
+  # Extract t-SNE coordinates and set column names
+  tsne_cords <- seurat@reductions[[tsne]]@cell.embeddings
+  colnames(tsne_cords) <- c("tsne_1", "tsne_2")
+  
+  # Get quality control stats
+  qc_stats <- seurat[[qc_features]]
+  
+  # Extract clusterings and convert to numeric
+  clusterings <- sapply(clustering_names, function(cf) {
+    (as.character(unlist(seurat[[cf]])))
+    # as.numeric(as.character(unlist(seurat[[cf]])))
+  })
+  
+  # Combine covariates including IDs, coordinates, and QC stats
+  if(is.null(extra_continuous_covs)) {
+    covs <- cbind(extra_discrete_covs, clusterings, 
+                  id = names(seurat$orig.ident), tsne_cords, umap_cords, qc_stats)
+  } else{
+    covs <- cbind(extra_discrete_covs, clusterings, extra_continuous_covs,
+                  id = names(seurat$orig.ident), tsne_cords, umap_cords, qc_stats)
+  }
+  
+  # Identify discrete and continuous covariates
+  discrete_covs <- c(colnames(extra_discrete_covs), clustering_names)
+  continuous_covs <- c(colnames(extra_continuous_covs), colnames(tsne_cords),
+                       colnames(umap_cords), colnames(qc_stats))
+  
+  # Return list with covariates and their types
+  return(list(covs = covs, discreteCovs = discrete_covs, continuousCovs = continuous_covs))
+}
+#######################
+calculate_gene_activity <- function(seurat) {
+  # # Set annotation for peaks in the ATAC assay
+  # Annotation(seurat@assays$peaks) <- seurat@assays$ATAC@annotation
+  # 
+  # library(EnsDb.Hsapiens.v86)
+  # # get gene annotations for hg38
+  # annotation <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v86)
+  # seqlevelsStyle(annotation) <- "UCSC"
+  
+  
+  # Compute gene activities
+  gene_activities <- GeneActivity(seurat, assay = "peaks")
+  
+  # Add gene activities to Seurat object
+  seurat[["GeneActivity"]] <- CreateAssayObject(counts = gene_activities)
+  
+  return(seurat)
+}
+
+
+attach_closest_features_to_atac_markers <- function(seurat, heatmap_artifacts) {
+  # # Setting annotation for ATAC assay
+  # Annotation(seurat@assays$peaks) <- seurat@assays$ATAC@annotation
+  
+  # Calculate closest feature
+  closest_feature <- ClosestFeature(seurat@assays$peaks, regions = granges(seurat@assays$peaks))
+  
+  # Annotate markers function
+  annotate_markers <- function(markers) {
+    markers %>%
+      left_join(closest_feature[, c("query_region", "gene_name", "type", "distance")],
+                by = c("gene" = "query_region")) %>%
+      select(gene, gene_name, type, distance, everything()) %>%
+      mutate_if(is.factor, as.character)
+  }
+  
+  # Iterate over each layer and clustering to annotate markers
+  for (layer in names(heatmap_artifacts)) {
+    print(paste0('working on ', layer))
+    for (clustering in names(heatmap_artifacts[[layer]]$clusterings)) {
+      current_clustering <- heatmap_artifacts[[layer]]$clusterings[[clustering]]
+      print(paste0('   clustering: ', clustering))
+      # If markers exist in the current clustering and layer is ATAC, annotate markers
+      if ("markers" %in% names(current_clustering) && layer == "atac") {
+        print('annotating single modal atac markers')
+        heatmap_artifacts[[layer]]$clusterings[[clustering]]$markers <- annotate_markers(current_clustering$markers)
+      } 
+      
+      # If ATAC is present in the current clustering, annotate markers
+      else if ("atac" %in% names(current_clustering)) {
+        heatmap_artifacts[[layer]]$clusterings[[clustering]]$atac$markers <- annotate_markers(current_clustering$atac$markers)
+      }
+    }
+  }
+  return(heatmap_artifacts)
+}
+
+
+#############
+write_mm_h5 <- function(seurat, covs_discrete, heatmap_artifacts, filename) {
+  
+  # Calculate gene activity and attach closest features
+  seurat <- seurat %>% calculate_gene_activity()
+  heatmap_artifacts <- attach_closest_features_to_atac_markers(seurat, heatmap_artifacts)
+  
+  # Define QC features and clustering features
+  qc_features <- c("nFeature_RNA", "nCount_RNA", "nFeature_ATAC", "nCount_ATAC",
+                   "nFeature_peaks", "nCount_peaks", "percent.mt", "percent.rp",
+                   "nucleosome_signal", "nucleosome_percentile", "TSS.enrichment", "TSS.percentile")
+  
+  clustering_features <- grep("clusters.*", colnames(seurat@meta.data), value = TRUE)
+  
+  # Define reductions
+  reductions <- list(rna = c("tsne.rna", "umap.rna"),
+                     atac = c("tsne.atac", "umap.atac"),
+                     wnn = c("wnn.tsne", "wnn.umap"))
+  
+  # Process each layer and attach heatmap artifacts
+  layer_names <- c("rna", "atac", "wnn")
+  layers <- lapply(layer_names, function(layer) {
+    layer_artifacts <- layer_artifacts_from_seurat(
+      seurat, 
+      qc_features = qc_features, 
+      umap = reductions[[layer]][2],
+      tsne = reductions[[layer]][1],
+      clustering_names = clustering_features,
+      extra_discrete_covs = covs_discrete
+    )
+    layer_artifacts[["clusterings"]] <- heatmap_artifacts[[layer]]
+    layer_artifacts
+  })
+  
+  names(layers) <- layer_names
+  
+  # Write to .h5 file
+  write_h5(filename, seurat, layers = layers, assays = c("RNA", "peaks", "GeneActivity"))
+           
+}
 
 #############################
 create.report <- function(seurat, preds, config, version='original', marker.sets) {
@@ -890,6 +1111,7 @@ do.sub.categories <- function(cts){
       grepl("^CD14 .*", cts) ~ "Myeloids",
       grepl("^CD16 .*", cts) ~ "Myeloids",
       grepl("ASDC", cts) ~ "Myeloids", 
+      grepl("Macrophages", cts) ~ "Myeloids",
       
       grepl("HSPC", cts) ~ "Others",
       grepl("Eryth", cts) ~ "Others",
@@ -947,6 +1169,7 @@ do.main.categories.tumor <- function(cts){
 
 
 ################
+
 do.main.sub.categories <- function(default.ct, seurat.wnn){
   sub.categories <- do.sub.categories(default.ct)
   main.categories <- do.main.categories(sub.categories)
@@ -989,173 +1212,6 @@ do.main.sub.categories <- function(default.ct, seurat.wnn){
 
 
 ################################
-
-create.cluster.avg <- function(motif_analysis, clustering_resolution){
-  Idents(motif_analysis) <- clustering_resolution
-  DefaultAssay(motif_analysis) <- "RNA"
-  
-  motif_analysis <- NormalizeData(motif_analysis, assay = "RNA")
-  motif_analysis <- ScaleData(motif_analysis)
-  cluster.averages <- AverageExpression(motif_analysis, return.seurat = TRUE)
-  
-  
-  DefaultAssay(cluster.averages) <- "SCT"
-  cluster.averages <- NormalizeData(cluster.averages, assay = "SCT")
-  cluster.averages <- ScaleData(cluster.averages)
-  
-  
-  DefaultAssay(cluster.averages) <- "peaks"
-  cluster.averages <- NormalizeData(cluster.averages, assay = "peaks")
-  cluster.averages <- ScaleData(cluster.averages)
-  
-  
-  return(cluster.averages)
-}
-
-# add.feature.names <- function(dataset){
-#   library(tibble)
-#   feature.names <- rownames(dataset)
-#   dataset <- dataset %>% as_tibble %>% 
-#     add_column(feature.names=feature.names, .before=1) %>% 
-#     as.data.frame()
-#  # rownames(dataset) <- dataset$feature.names #because rownames may have duplicates, BUT rownames of df not allow duplicates
-#   return(dataset)
-# }
-  
-
-export.cluster.avg.and.heatmap <- function(cluster.averages, markers.use, xlsx.name, assay){
-  
-  library(openxlsx)
-  wb<-createWorkbook(xlsx.name)
-  
-  addWorksheet(wb, sheetName = "all_markers_lognorm")
-  all_markers_lognorm <- as.matrix(cluster.averages[[assay]]@data) %>% add.feature.names
-  writeData(wb, sheet = "all_markers_lognorm", all_markers_lognorm, rowNames=TRUE)
-  
-  
-  addWorksheet(wb, sheetName = "heatmap_markers_lognorm")
-  heatmap_markers_lognorm <- as.matrix(cluster.averages[[assay]]@data[markers.use$gene,]) %>% add.feature.names
-  writeData(wb, sheet = "heatmap_markers_lognorm", heatmap_markers_lognorm, rowNames=TRUE)
-  
-  
-  addWorksheet(wb, sheetName = "all_markers_scaled")
-  all_markers_scaled <- as.matrix(cluster.averages[[assay]]@scale.data) %>% add.feature.names
-  writeData(wb, sheet = "all_markers_scaled", all_markers_scaled, rowNames=TRUE)
-  
-  addWorksheet(wb, sheetName = "heatmap_markers_scaled")
-  heatmap_markers_scaled <- as.matrix(cluster.averages[[assay]]@scale.data[markers.use$gene,]) %>% add.feature.names
-  writeData(wb, sheet = "heatmap_markers_scaled", heatmap_markers_scaled, rowNames = TRUE)
-  
-  saveWorkbook(wb, file = xlsx.name, overwrite=TRUE)
-  
-  return(list(all_markers_lognorm = all_markers_lognorm, 
-              heatmap_markers_lognorm = heatmap_markers_lognorm, 
-              all_markers_scaled = all_markers_scaled, 
-              heatmap_markers_scaled = heatmap_markers_scaled
-  ))
-  
-}
-
-
-create.and.export.clus.avg <- function(wnn.clusterings, ident_clustering_resolution, marker.set, 
-                                       clustering_resolution, 
-                                       assay){
- #assay = SCT if RNA
-  cluster.averages <- create.cluster.avg(wnn.clusterings, ident_clustering_resolution)
-  
-  require(dplyr)
-  min.lfg <- 0.0
-  max.p.adj <- 0.05
-  limit <- 20
-  mask.mt.rp <- T
-  markers.use=subset(marker.set,avg_log2FC > min.lfg & 
-                       p_val_adj < max.p.adj & 
-                       !(mask.mt.rp & (grepl("^RP[SL]", gene) | grepl("^MT", gene)))) %>%
-    group_by(cluster) %>% 
-    top_n(limit, -p_val_adj) %>% 
-    top_n(limit, abs(pct.1-pct.2)) %>%
-    arrange(as.factor(cluster))
-  
-  xlsx.name <- paste0("cluster.averages_", clustering_resolution, ".xlsx")
-  list_clus_avg <- export.cluster.avg.and.heatmap(cluster.averages, markers.use, xlsx.name, assay = assay)
-  #list_clus_avg$markers <- marker.set
-  
-  # fileName <- paste0("clus.avg", '_', clustering_resolution,'_', assay, ".pdf")
-  # plot.heatmap.seurat(wnn.clusterings, marker.set, fileName)
-  # 
-  #list_clus_avg <- lapply(list_clus_avg, as.data.frame)
-  
-  return(list_clus_avg)
-}
-
-################
-
-find.markers_wnn_0.6 <- function(seurat.wnn.clusterings){
-  wnn_rna_0.6 <- find.markers.by.clustering(seurat.wnn.clusterings, "clusters_wsnn_0.6", assay="RNA")
-  wnn_peaks_0.6 <- find.markers.by.clustering(seurat.wnn.clusterings, "clusters_wsnn_0.6", assay="peaks")
-  return(list(rna = wnn_rna_0.6, 
-              atac = wnn_peaks_0.6))
-}
-
-
-plot.heatmap_wnn_0.6_peaks_rna <- function(seurat.wnn.clusterings, wnn_0.6_markers){
-  
-  DefaultAssay(seurat.wnn.clusterings) <- "RNA"
-  Idents(seurat.wnn.clusterings) <- seurat.wnn.clusterings@meta.data$clusters_wsnn_0.6
-  fileName <- "heatmap.wnn_0.6.RNA.markers.pdf"
-  clus.avg_wsnn_0.6_rna <- plot.heatmap.seurat(seurat.wnn.clusterings, 
-                                               markers = wnn_0.6_markers$rna, 
-                                               "RNA", fileName=fileName, marker.set.name="wnn_0.6_RNA")
-  
-  DefaultAssay(seurat.wnn.clusterings) <- "peaks"
-  Idents(seurat.wnn.clusterings) <- seurat.wnn.clusterings@meta.data$clusters_wsnn_0.6
-  fileName <- "heatmap.wnn_0.6.peaks.markers.pdf"
-  clus.avg_wsnn_0.6_peaks <- plot.heatmap.seurat(seurat.wnn.clusterings, 
-                                               markers = wnn_0.6_markers$atac, 
-                                               "peaks", fileName=fileName, marker.set.name="wnn_0.6_peaks")
-  
-  
-  return(list(rna = clus.avg_wsnn_0.6_rna, 
-              atac = clus.avg_wsnn_0.6_peaks))
-}
-
-
-calculate.wnn_0.6 <- function(seurat.wnn.clusterings){
-  
-  wnn_0.6_markers <- find.markers_wnn_0.6(seurat.wnn.clusterings) 
-  clus.avg_wsnn_0.6 <- plot.heatmap_wnn_0.6_peaks_rna(seurat.wnn.clusterings, wnn_0.6_markers)
-  
-  return(markers = wnn_0.6_markers, 
-         clus.avg = clus.avg_wsnn_0.6)
-}
-
-# add.feature.names <- function(list_of_list){
-#   update_lst <- lapply(list_of_list, function(dataset){
-#     dataset <- dataset %>% as_tibble %>% add_column(feature.names=rownames(dataset), .before=0) %>%
-#       as.data.frame()
-#   })
-#   return(update_lst)
-# }
-
-clus.avg.prep.for.h5 <- function(clus.avg_main.cat, marker.set){
-  
-  #add feature names
-  modality <- c("rna", "atac")
-  library(tibble)
-  
-  clus.avg_main.cat_h5 <- lapply(names(clus.avg_main.cat), function(modality){
-    lst_resolutions <- clus.avg_main.cat[[modality]]
-    lst_resolutions_update <- add.feature.names(lst_resolutions)
-    return(lst_resolutions_update)
-  })
-  names(clus.avg_main.cat_h5) <- names(clus.avg_main.cat)
-  
-  #add marker list to this clus.avg
-  for (layer in names(clus.avg_main.cat_h5)){
-    clus.avg_main.cat_h5[[layer]][["markers"]] <- marker.set[[layer]]
-  }
-  return(clus.avg_main.cat_h5)
-}
 
 
 

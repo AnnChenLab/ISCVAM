@@ -1,5 +1,178 @@
 [
     {
+        "name": "multiome_human_kidney",
+        "filename": "data/datasets/multiome_human_kidney_2.h5"
+    },
+
+    {
+        "name": "KIRC_GSE171306.add.Endo.layer",
+        "filename": "data/datasets/KIRC_GSE171306.add.Endo.layer.h5"
+    },
+    {
+        "name": "KIRC_GSE159115.add.Endo.layer",
+        "filename": "data/datasets/KIRC_GSE159115.add.Endo.layer.h5"
+    },
+         {
+        "name": "multiome_human_brain_3k",
+        "filename": "data/datasets/multiome_human_brain_3k_10.h5"
+    },
+ {
+        "name": "11_KICH_GSE159115.multiStages_without.truncatedSVD",
+        "filename": "data/datasets/KICH_GSE159115.multiStages_without.truncatedSVD.h5"
+    },
+
+    {
+        "name": "11_KICH_GSE159115.multiStages",
+        "filename": "data/datasets/KICH_GSE159115.multiStages.h5"
+    },
+
+    {
+        "name": "15_NSCLC_GSE151537.multiStages",
+        "filename": "data/datasets/NSCLC_GSE151537.multiStages.h5"
+    },
+    {
+        "name": "NSCLC_GSE127471.multiStages",
+        "filename": "data/datasets/NSCLC_GSE127471.multiStages.h5"
+    },
+
+    {
+        "name": "multiome_discovery",
+        "filename": "data/datasets/discovery.github.h5"
+    },
+    {
+        "name": "multiome_int.validation",
+        "filename": "data/datasets/int.validation_github.test.h5"
+    },
+    {
+        "name": "multiome_PBMC",
+        "filename": "data/datasets/PBMC_multiome_github.h5"
+    },
+    {
+        "name": "Glioma_GSE102130.pipeline.h5",
+        "filename": "data/datasets/Glioma_GSE102130.pipeline.h5"
+    },
+
+    {
+        "name": "SKCM_GSE115978_aPD1.pipeline",
+        "filename": "data/datasets/SKCM_GSE115978_aPD1.pipeline.4.h5"
+    },
+    {
+        "name": "GSE189341-acral-sc-old",
+        "filename": "data/datasets/GSE189341.h5"
+    },
+
+    {
+        "name": "GSE189341-acral-sc",
+        "filename": "data/datasets/GSE189341.add.cts.1.h5"
+    },
+
+
+     {
+        "name": "UVM_GSE169609",
+        "filename": "data/datasets/UVM_GSE169609.h5"
+    },
+
+    {
+        "name": "UVM_GSE160883",
+        "filename": "data/datasets/UVM_GSE160883.h5"
+    },
+
+
+    {
+        "name": "UVM_GSE138433",
+        "filename": "data/datasets/UVM_GSE138433.h5"
+    },
+
+
+    {
+        "name": "SKCM_GSE179373",
+        "filename": "data/datasets/SKCM_GSE179373.h5"
+    },
+
+    {
+        "name": "SKCM_GSE166181_aPD1",
+        "filename": "data/datasets/SKCM_GSE166181_aPD1.h5"
+    },
+
+
+    {
+        "name": "SKCM_GSE159251",
+        "filename": "data/datasets/SKCM_GSE159251.h5"
+    },
+
+    {
+        "name": "SKCM_GSE148190",
+        "filename": "data/datasets/SKCM_GSE148190.h5"
+    },
+
+    {
+        "name": "SKCM_GSE139249",
+        "filename": "data/datasets/SKCM_GSE139249.h5"
+    },
+
+     {
+        "name": "SKCM_GSE134388_aPD1",
+        "filename": "data/datasets/SKCM_GSE134388_aPD1.h5"
+    },
+
+    {
+        "name": "SKCM_GSE123139",
+        "filename": "data/datasets/SKCM_GSE123139.h5"
+    },
+
+    {
+        "name": "SKCM_GSE120575_aPD1aCTLA4",
+        "filename": "data/datasets/SKCM_GSE120575_aPD1aCTLA4.h5"
+    },
+
+
+    {
+        "name": "SKCM_GSE72056",
+        "filename": "data/datasets/SKCM_GSE72056.h5"
+    },
+
+    {
+        "name": "SKCM_GSE115978_aPD1",
+        "filename": "data/datasets/SKCM_GSE115978_aPD1.h5"
+    },
+    
+     {
+        "name": "UVM_GSE139829_update.curated",
+        "filename": "data/datasets/UVM_GSE139829_update.endo.1.h5"
+    },
+
+    {
+        "name": "UVM_GSE139829_2stages",
+        "filename": "data/datasets/UVM_GSE139829.endo.h5"
+    },
+
+    {
+        "name": "UVM_GSE139829",
+        "filename": "data/datasets/UVM_GSE139829.h5"
+    },
+    
+    {
+        "name": "KIRC_GSE159115",
+        "filename": "data/datasets/KIRC_GSE159115.h5"
+    },
+
+   {
+        "name": "BRCA GSE148673",
+        "filename": "data/datasets/BRCA_GSE148673_3.h5"
+    },
+   
+   {
+        "name": "Acral melanoma",
+        "filename": "data/datasets/GSE189889_acral_2101.debatched.iscva.h5"
+    },
+
+   {
+        "name": "Smalley project",
+        "filename": "data/datasets/Smalley_update_h5.h5"
+    },
+
+
+    {
         "name": "discovery_dataset",
         "filename": "data/demo/test_discover_42.h5"
     },

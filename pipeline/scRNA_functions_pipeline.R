@@ -184,7 +184,7 @@ analyze.seurat <- function(seurat, pcs.to.compute=200, pcs.to.analyze=40, debatc
 
 
 
-do.clusterings <- function(seurat, pcs.to.analyze) {
+do.clusterings <- function(seurat) {
   for(resolution in c(0.6,0.8, 1, 1.2, 2, 4)) {
     seurat <- FindClusters(seurat, resolution = resolution)
     seurat[[paste0("seurat_clusters_",resolution)]] = seurat$seurat_clusters
