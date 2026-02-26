@@ -17,7 +17,37 @@ Contact: ann.chen@hci.utah.edu
 
 We provide two analysis pipelines for preparing data for ISCVAM:
 
+### 1. scRNA-seq Pipeline## Analysis Pipelines
+
+We provide two analysis pipelines for preparing data for ISCVAM:
+
 ### 1. scRNA-seq Pipeline
+For single-cell RNA sequencing data only.
+- Location: `pipelines/sc_rna_pipeline/`
+- Input: 10x Genomics scRNA-seq data
+- Output: H5 file with expression data, clustering, and annotations
+- See [scRNA-seq Pipeline README](pipelines/sc_rna_pipeline/README.md) for detailed instructions
+
+**Example Data & Results:**  
+- Download example input data and results from [Google Drive link placeholder].
+- Place downloaded files in `pipelines/sc_rna_pipeline/example_data/` and `pipelines/sc_rna_pipeline/results/` as appropriate.
+- These files are not tracked by Git (see `.gitignore`).
+
+### 2. Multiome Pipeline
+For 10x Multiome data (scRNA-seq + scATAC-seq).
+- Location: `pipelines/multiome_pipeline/`
+- Input: 10x Genomics Multiome data (Cell Ranger ARC output)
+- Output: H5 file with RNA, ATAC, and integrated WNN analysis
+- See [Multiome Pipeline README](pipelines/multiome_pipeline/README.md) for detailed instructions
+
+**Example Data & Results:**  
+- Download example input data and results from [Google Drive link placeholder].
+- Place downloaded files in `pipelines/multiome_pipeline/example_data/` and `pipelines/multiome_pipeline/results/` as appropriate.
+- These files are not tracked by Git (see `.gitignore`).
+
+> **Before running the code:**  
+> Please download the example data and results from the provided Drive links and place them in the specified folders.  
+> This ensures the pipelines have the necessary input files and example outputs for testing and demonstration.
 For single-cell RNA sequencing data only.
 - Location: `pipelines/sc_rna_pipeline/`
 - Input: 10x Genomics scRNA-seq data
