@@ -228,6 +228,28 @@ sketch
 .history
 .ionide
 
+
+# ignore all .h5 files 
+*.h5
+# old pipeline files
+old_pipeline/
+
+# acral pipeline files
+pipelines/acral
+
+# old result of scRNAseq pipelines
+pipelines/sc_rna_pipeline/example.results.old
+
+#example data and example results for pipelines
+pipelines/multiome_pipeline/example_data
+pipelines/multiome_pipeline/results
+pipelines/sc_rna_pipeline/example.results
+pipelines/sc_rna_pipeline/example.datasets
+pipelines/multiome_pipeline/code_organized/ref_data
+pipelines/sc_rna_pipeline/reference_data/singler.refs.rdata
+# old pipelines code from Thanh
+example_scripts_old/
+
+
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,r,react
 
-*.h5
