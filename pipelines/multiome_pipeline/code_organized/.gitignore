@@ -1,0 +1,60 @@
+# ============================================================================
+# MULTIOME PIPELINE .gitignore
+# ============================================================================
+# This file keeps only the essential pipeline files and ignores utility/helper scripts
+# Essential files for run_pipeline.R:
+#   - configure_dataset.R
+#   - install_packages.R
+#   - core/run_pipeline.R
+#   - core/run_pipeline_multisamples.R
+#   - core/multiome_functions_pipeline.R
+#   - utils/iscvamR_h5_customized.SeuratV5.R
+#   - utils/updated_write_h5_scripts_using_iscvamR.R
+#   - ref_data/singler.refs.rdata
+
+# ============================================================================
+# System Files
+# ============================================================================
+.DS_Store
+*.Rhistory
+.RData
+.Rproj.user/
+
+# ============================================================================
+# Utils - Ignore non-essential utility scripts
+# ============================================================================
+utils/01_linkpeaks_atac_sct.R
+utils/02_tf_bubble_from_peak.R
+utils/add_prefix_to_fragmentfile.R
+utils/azimuth_test.R
+utils/bubble_chart_fig_1.R
+utils/harmony_vs_mnn.R
+utils/integration_RNA_mul_val.R
+utils/linkpeak_cal.R
+utils/log_sct_comparison.R
+utils/match_curated_celltyes_multiome_discovery.R
+utils/pre_post_batch.R
+utils/rna_harmony_utils.R
+utils/validate_merged_data.R
+
+# ============================================================================
+# Preprocessing - Ignore pre-processing scripts
+# ============================================================================
+preprocessing/
+
+# ============================================================================
+# Postprocessing - Ignore post-processing scripts
+# ============================================================================
+postprocessing/
+
+# ============================================================================
+# Reference Data - Ignore non-essential reference files
+# ============================================================================
+ref_data/*.csv
+ref_data/extract_celltype_fromh5.R
+
+# ============================================================================
+# Core - Ignore integration variant (optional)
+# ============================================================================
+core/multiome_functions_pipeline_w_integrations.R
+core/run_pipeline_multisamples.R
