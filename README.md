@@ -17,7 +17,7 @@ Contact: ann.chen@hci.utah.edu
 
 We provide two analysis pipelines for preparing data for ISCVAM:
 
-### 1. scRNA-seq Pipeline## Analysis Pipelines
+### 1. scRNA-seq Pipeline
 
 We provide two analysis pipelines for preparing data for ISCVAM:
 
