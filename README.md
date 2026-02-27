@@ -28,10 +28,9 @@ For single-cell RNA sequencing data only.
 - Output: H5 file with expression data, clustering, and annotations
 - See [scRNA-seq Pipeline README](pipelines/sc_rna_pipeline/README.md) for detailed instructions
 
-**Example Data & Results:**  
-- Download example input data and results from [Google Drive link placeholder].
-- Place downloaded files in `pipelines/sc_rna_pipeline/example_data/` and `pipelines/sc_rna_pipeline/results/` as appropriate.
-- These files are not tracked by Git (see `.gitignore`).
+**Example Data:**  
+- Example dadaset can be downloaded directly from TISCH2: https://tisch.compbio.cn/gallery/?cancer=NSCLC&species=
+- Place downloaded files in `pipelines/sc_rna_pipeline/example_data/` as appropriate.
 
 ### 2. Multiome Pipeline
 For 10x Multiome data (scRNA-seq + scATAC-seq).
@@ -40,13 +39,14 @@ For 10x Multiome data (scRNA-seq + scATAC-seq).
 - Output: H5 file with RNA, ATAC, and integrated WNN analysis
 - See [Multiome Pipeline README](pipelines/multiome_pipeline/README.md) for detailed instructions
 
-**Example Data & Results:**  
-- Download example input data and results from [Google Drive link placeholder].
-- Place downloaded files in `pipelines/multiome_pipeline/example_data/` and `pipelines/multiome_pipeline/results/` as appropriate.
-- These files are not tracked by Git (see `.gitignore`).
+**Example Data:**  
+- Example datasets are downloaded from 10x genomics 
+  - https://www.10xgenomics.com/datasets/frozen-human-healthy-brain-tissue-3-k-1-standard-2-0-0
+  - https://www.10xgenomics.com/datasets/human-kidney-cancer-nuclei-isolated-with-chromium-nuclei-isolation-kit-saltyez-protocol-and-10x-complex-tissue-dp-ct-sorted-and-ct-unsorted-1-standard
+- Place downloaded files in `pipelines/multiome_pipeline/example_data/` as appropriate.
 
 > **Before running the code:**  
-> Please download the example data and results from the provided Drive links and place them in the specified folders.  
+> Please download the example data and results from the provided Drive links and place them in the specified folders if necessary.  
 > This ensures the pipelines have the necessary input files and example outputs for testing and demonstration.
 For single-cell RNA sequencing data only.
 - Location: `pipelines/sc_rna_pipeline/`
