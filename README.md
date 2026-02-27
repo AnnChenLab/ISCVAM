@@ -108,19 +108,16 @@ ISCVAM/
 
 ## Example Datasets
 
-We applied ISCVAM to investigate cell populations using multiple *multiome* datasets for proof of principle:
+We applied ISCVAM to investigate cell populations using multiple *multiome* datasets and scRNAseq datasets for proof of principle:
+Example datasets listed in this github:
 
 | Dataset | Cells | Description |
 |---------|-------|-------------|
-| Ovarian Cancer TRM/ReCir | 16,232 | CD8+ T cells from 4 patients (Anadon, Yu et al. 2022, GEO: GSE192780) |
-| PBMC | 11,172 | 10x Genomics PBMC sample |
 | Human Brain | 3,233 | 10x Genomics healthy brain tissue |
 | Human Kidney Cancer | 22,722 | 10x Genomics kidney cancer nuclei |
+| NSCLC_GSE127471 | 1108 | TISCH2 Lung Cancer |
 
-In our *manuscript*, datasets were organized as:
-- **Discovery dataset**: Paired TRM and ReCir samples from patient 100809M (ovarian cancer)
-- **Internal validation dataset**: Remaining 3 patients with paired TRM/ReCir samples
-- **External validation dataset**: PBMC multiome data
+Find more datasets in our *website* https://chenlab.chpc.utah.edu/iscvam/
 
 ### References
 - Anadon et al. *Ovarian cancer immunogenicity is governed by a narrow subset of progenitor tissue-resident memory T cell.* Cancer Cell (2022)
