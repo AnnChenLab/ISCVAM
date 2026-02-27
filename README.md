@@ -46,7 +46,7 @@ For 10x Multiome data (scRNA-seq + scATAC-seq).
 - Place downloaded files in `pipelines/multiome_pipeline/example_data/` as appropriate.
 
 > **Before running the code:**  
-> Please download the example data and results from the provided Drive links and place them in the specified folders if necessary.  
+> Please download the example data and results from the provided links and place them in the specified folders.  
 > This ensures the pipelines have the necessary input files and example outputs for testing and demonstration.
 For single-cell RNA sequencing data only.
 - Location: `pipelines/sc_rna_pipeline/`
